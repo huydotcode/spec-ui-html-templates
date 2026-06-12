@@ -20,7 +20,7 @@
   <body>
     <!-- Đặt ngay sau <body> -->
     <template id="ai-ruleset">
-      ## AI RULESET v1.5 — ĐỌC TRƯỚC KHI TẠO HTML
+      ## AI RULESET v1.6 — ĐỌC TRƯỚC KHI TẠO HTML
 
       ### NGUYÊN TẮC BẮT BUỘC
       - Chỉ dùng class có trong #component-reference bên dưới
@@ -53,6 +53,12 @@
       - Trạng thái / điều kiện → flowchart TD
       - Kiến trúc module → graph TD
       - Luồng người dùng → flowchart LR
+
+      ### LƯU Ý PHÁT TRIỂN HỆ THỐNG (MỚI)
+      - **Tránh đè Sticky Layout**: Nếu kích hoạt Sticky Header, bắt buộc đặt `top` của `.sidebar` tối thiểu `80px` để tránh đè chữ.
+      - **Cơ chế Copy tương thích**: Phải có fallback sử dụng `textarea` phòng khi sao chép mã ở giao thức không bảo mật (`file://` hoặc IP local) làm `navigator.clipboard` bị `undefined`.
+      - **Mã hóa ký tự đặc biệt**: Trong code blocks, bắt buộc thay thế `&lt;` thành `&amp;lt;` và `&gt;` thành `&amp;gt;` để trình duyệt không biên dịch thành thẻ HTML. Nhãn sơ đồ Mermaid chứa ký tự đặc biệt hoặc dấu gạch chéo `/` phải đặt trong dấu nháy kép `""`.
+      - **Tránh dùng mũi tên ngược trong Mermaid**: Không dùng `<-` hoặc `<--` trong flowchart vì gây lỗi cú pháp (Syntax Error). Để vẽ mũi tên ngược, hãy đảo vị trí khai báo nút nguồn và đích, rồi dùng mũi tên xuôi `-->` chuẩn.
     </template>
 
     <header class="hero">
