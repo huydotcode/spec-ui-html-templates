@@ -98,7 +98,13 @@ const server = http.createServer((req, res) => {
   res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
   res.setHeader("Pragma", "no-cache");
   res.setHeader("Expires", "0");
-  let pathname = decodeURIComponent(new URL(req.url, `http://localhost:${PORT}`).pathname);
+  let pathname;
+  try {
+    pathname = decodeURIComponent(new URL(req.url, `http://localhost:${PORT}`).pathname);
+  } catch (err) {
+    res.writeHead(400, { "Content-Type": "text/plain; charset=UTF-8" });
+    return res.end("400 Bad Request: Malformed URI");
+  }
 
   // Endpoint tiếp nhận kết nối Server-Sent Events (SSE)
   if (ENABLE_LIVE_RELOAD && pathname === "/__livereload") {
@@ -154,8 +160,23 @@ const server = http.createServer((req, res) => {
     }
 
     res.writeHead(200, { "Content-Type": MIME_TYPES[ext] || "application/octet-stream" });
-    fs.createReadStream(filePath).pipe(res);
+    const stream = fs.createReadStream(filePath);
+    stream.on("error", (streamErr) => {
+      if (!res.headersSent) {
+        res.writeHead(500, { "Content-Type": "text/plain; charset=UTF-8" });
+        res.end("500 Read Stream Error");
+      }
+    });
+    stream.pipe(res);
   });
+});
+
+server.on("error", (err) => {
+  console.error("[Spec UI] Loi Server:", err.message);
+});
+
+process.on("uncaughtException", (err) => {
+  console.error("[Spec UI] Loi He Thong (Uncaught):", err.message);
 });
 
 server.listen(PORT, () => {
