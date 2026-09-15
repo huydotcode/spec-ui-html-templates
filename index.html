@@ -555,9 +555,9 @@
 
                     const container = document.getElementById("spec-ui-theme-switcher");
                     if (container) {
-                      const label = container.querySelector(".theme-name-label");
-                      if (label) {
-                        label.textContent = themePref === "auto" ? "Tự động" : themeObj.name;
+                      const switcherBtn = container.querySelector(".theme-switcher-btn");
+                      if (switcherBtn) {
+                        switcherBtn.title = `Giao diện: ${themePref === "auto" ? "Tự động (" + themeObj.name + ")" : themeObj.name} (Bấm để đổi)`;
                       }
                       const optionBtns = container.querySelectorAll(".theme-option-btn");
                       optionBtns.forEach((btn) => {
@@ -590,10 +590,8 @@
                     const activeTheme = getActiveThemeObject();
 
                     container.innerHTML = `
-                      <button type="button" class="theme-switcher-btn" title="Chuyển đổi giao diện (Theme Switcher)">
+                      <button type="button" class="theme-switcher-btn" title="Giao diện: ${savedPreference === "auto" ? "Tự động (" + activeTheme.name + ")" : activeTheme.name} (Bấm để đổi)" aria-label="Chuyển đổi giao diện (Theme Switcher)">
                         <i class="ti ti-palette"></i>
-                        <span class="theme-name-label">${savedPreference === "auto" ? "Tự động" : activeTheme.name}</span>
-                        <i class="ti ti-chevron-down" style="font-size:0.75rem; opacity:0.7; margin-left: 2px;"></i>
                       </button>
                       <div class="theme-switcher-dropdown">
                         <button type="button" class="theme-option-btn ${savedPreference === "auto" ? "is-active" : ""}" data-theme="auto">

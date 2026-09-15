@@ -911,7 +911,7 @@ body::after {
 .app-nav {
   position: absolute !important;
   top: 14px !important;
-  right: 175px !important;
+  right: 70px !important;
   left: auto !important;
   margin: 0 !important;
   color: var(--ink) !important;
@@ -1976,16 +1976,14 @@ html[data-theme="solarized-paper"] .mermaid svg .label {
 .theme-switcher-btn {
   display: inline-flex;
   align-items: center;
-  gap: 7px;
-  padding: 6px 14px;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
   background: var(--surface);
   border: 1px solid var(--line);
-  border-radius: 99px;
-  color: var(--ink);
-  font-family: var(--base-font-family);
-  font-size: 0.88rem !important;
-  font-weight: 500 !important;
-  line-height: 1.5 !important;
+  border-radius: 50%;
+  color: var(--accent);
   cursor: pointer;
   box-shadow: var(--shadow);
   backdrop-filter: blur(10px);
@@ -1996,26 +1994,19 @@ html[data-theme="solarized-paper"] .mermaid svg .label {
 
 .theme-switcher-btn:hover {
   border-color: var(--accent);
-  color: var(--accent);
+  color: var(--accent-2);
   transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
 }
 
 .theme-switcher-btn .ti {
-  font-size: 1.05rem;
+  font-size: 1.2rem;
   color: var(--accent);
+  transition: transform 0.25s ease;
 }
 
-@media (max-width: 1280px) {
-  .theme-switcher-btn {
-    padding: 6px 10px;
-    gap: 4px;
-  }
-  .theme-switcher-btn .theme-name-label {
-    display: none;
-  }
-  .app-nav {
-    right: 76px !important;
-  }
+.theme-switcher-btn:hover .ti {
+  transform: rotate(15deg);
 }
 
 @media (max-width: 1080px) {
@@ -2023,6 +2014,7 @@ html[data-theme="solarized-paper"] .mermaid svg .label {
     display: none !important;
   }
 }
+
 
 .theme-switcher-dropdown {
   position: absolute;
