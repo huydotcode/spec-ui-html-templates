@@ -50,7 +50,7 @@ Tài liệu được phân chia thành các phần chi tiết trong thanh điề
 </div>
 
 <div class="callout warning">
-  <i class="ti ti-alert-triangle"></i> <strong>Lưu ý quan trọng:</strong> Luôn sử dụng thẻ <code>&lt;div class="diagram-wrapper"&gt;</code> bao quanh khối Mermaid để kích hoạt thanh công cụ Toolbar và Fullscreen Modal.
+  <i class="ti ti-alert-triangle"></i> <strong>Lưu ý quan trọng:</strong> Trình biên dịch Docsify tự động bọc thẻ <code>&lt;div class="diagram-wrapper"&gt;</code> cho mọi khối <code>```mermaid</code> tiêu chuẩn, tự kích hoạt thanh công cụ Toolbar và Fullscreen Modal mà không cần bọc thủ công.
 </div>
 
 <div class="callout danger">

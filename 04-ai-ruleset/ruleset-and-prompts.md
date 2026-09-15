@@ -1,6 +1,6 @@
-# Quy Chuẩn Dành Cho AI (AI Ruleset v1.7)
+# Quy Chuẩn Dành Cho AI (AI Ruleset v2.5.1)
 
-<span class="status-label stable">AI Ruleset Specification v1.7</span>
+<span class="status-label stable">AI Ruleset Specification v2.5.1</span>
 
 Tài liệu này định nghĩa tập hợp các quy định bắt buộc dành cho lập trình viên và các trình sinh mã tự động (AI Code Generators / LLMs) khi tạo mới hoặc cập nhật các trang tài liệu trong hệ sinh thái **Spec UI System**.
 
@@ -20,13 +20,13 @@ Tài liệu này định nghĩa tập hợp các quy định bắt buộc dành 
 
 Mỗi tệp tài liệu đặc tả chức năng phải tuân thủ đúng thứ tự 5 phần sau:
 
-```text
+````text
 1. Tiêu đề H1 + Nhãn trạng thái (.status-label) + Tóm tắt nghiệp vụ
-2. Sơ đồ Mermaid trực quan (.diagram-wrapper > pre.mermaid)
+2. Sơ đồ Mermaid trực quan (khối mã ```mermaid chuẩn, Docsify tự động bọc .diagram-wrapper)
 3. Bảng đặc tả API (sử dụng .badge HTTP method) hoặc Bảng tham số I/O
 4. Hộp thông tin phân cấp (.callout.warning hoặc .callout.info) cho logic ngầm
 5. Khối so sánh mã nguồn (<!-- tabs:start --> ... <!-- tabs:end -->) nếu là dự án Migration
-```
+````
 
 ---
 
@@ -38,7 +38,7 @@ Mỗi tệp tài liệu đặc tả chức năng phải tuân thủ đúng thứ
 | **BADGE**   | `.badge.get` \| `.badge.post` \| `.badge.put` \| `.badge.delete` \| `.badge.patch`                      |
 | **STATUS**  | `.status-label.stable` \| `.status-label.review` \| `.status-label.draft` \| `.status-label.deprecated` |
 | **TABLE**   | `.table-tech` (kết hợp `<span class="required-star">*</span>` cho trường bắt buộc)                      |
-| **DIAGRAM** | `.diagram-wrapper > pre.mermaid + .diagram-caption`                                                     |
+| **DIAGRAM** | Khối mã ` ```mermaid ` chuẩn (Docsify tự động bọc `.diagram-wrapper`) + `.diagram-caption`              |
 | **TABS**    | `<!-- tabs:start -->` ... `<!-- tabs:end -->` (cú pháp Docsify-Tabs)                                    |
 | **ICONS**   | Tabler Icons Webfont: `<i class="ti ti-[tên-icon]"></i>` (chỉ dùng khi cần mục đích công năng)          |
 

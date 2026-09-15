@@ -5,7 +5,8 @@
     <title>Cổng Tài Liệu & Đặc Tả Hệ Thống - Spec UI System</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
-    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+    <link rel="alternate icon" href="favicon.ico" type="image/x-icon" />
 
     <!-- Anti-FOUC Early Theme Bootloader (Chống chớp sáng trắng tuyệt đối) -->
     <script>
@@ -50,7 +51,7 @@
 
     <script>
       // ==============================================================
-      // SPEC UI MULTI-THEME REGISTRY & ENGINE (v2.4.0)
+      // SPEC UI MULTI-THEME REGISTRY & ENGINE (v2.5.1)
       // ==============================================================
       const THEME_REGISTRY = [
         {
@@ -289,7 +290,7 @@
                 });
                 return (
                   '<div class="diagram-wrapper" style="margin: 20px 0;">' +
-                  '  <div class="mxgraph" style="max-width:100%; border:1px solid #e5d9c8; border-radius: 4px; min-height: 600px; background-color: #ffffff;" data-mxgraph="' +
+                  '  <div class="mxgraph" style="max-width:100%; border:1px solid var(--line); border-radius: var(--radius-sm); min-height: 600px; background-color: var(--surface);" data-mxgraph="' +
                   escapedJson +
                   '"></div>' +
                   "</div>"
@@ -777,31 +778,44 @@
                     const img = new Image();
                     img.crossOrigin = "anonymous";
                     img.onload = function () {
-                      const canvas = document.createElement("canvas");
-                      canvas.width = Math.round(width * scaleFactor);
-                      canvas.height = Math.round(height * scaleFactor);
-                      const ctx = canvas.getContext("2d");
+                      try {
+                        const canvas = document.createElement("canvas");
+                        canvas.width = Math.round(width * scaleFactor);
+                        canvas.height = Math.round(height * scaleFactor);
+                        const ctx = canvas.getContext("2d");
 
-                      ctx.fillStyle = activeTheme.swatchBg;
-                      ctx.fillRect(0, 0, canvas.width, canvas.height);
-                      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
-                      URL.revokeObjectURL(url);
+                        ctx.fillStyle = activeTheme.swatchBg;
+                        ctx.fillRect(0, 0, canvas.width, canvas.height);
+                        ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                        URL.revokeObjectURL(url);
 
-                      canvas.toBlob(function (pngBlob) {
-                        if (!pngBlob) return;
-                        const pngUrl = URL.createObjectURL(pngBlob);
-                        const a = document.createElement("a");
-                        a.href = pngUrl;
-                        a.download = getSanitizedFilename(title) + ".png";
-                        document.body.appendChild(a);
-                        a.click();
-                        document.body.removeChild(a);
-                        setTimeout(() => URL.revokeObjectURL(pngUrl), 1000);
-                      }, "image/png");
+                        canvas.toBlob(function (pngBlob) {
+                          if (!pngBlob) {
+                            console.warn("Không thể tạo PNG Blob từ Canvas, đang tải file SVG thay thế...");
+                            exportDiagramSVG(svgElement, title);
+                            return;
+                          }
+                          const pngUrl = URL.createObjectURL(pngBlob);
+                          const a = document.createElement("a");
+                          a.href = pngUrl;
+                          a.download = getSanitizedFilename(title) + ".png";
+                          document.body.appendChild(a);
+                          a.click();
+                          document.body.removeChild(a);
+                          setTimeout(() => URL.revokeObjectURL(pngUrl), 1000);
+                        }, "image/png");
+                      } catch (exportErr) {
+                        console.warn(
+                          "Trình duyệt chặn xuất Canvas PNG do chứa foreignObject. Đang chuyển hướng xuất file vector SVG...",
+                          exportErr,
+                        );
+                        exportDiagramSVG(svgElement, title);
+                      }
                     };
                     img.onerror = function (err) {
-                      console.error("Lỗi khi tải ảnh SVG vào Canvas PNG: ", err);
+                      console.error("Lỗi khi tải ảnh SVG vào Canvas PNG, đang chuyển hướng tải file SVG vector: ", err);
                       URL.revokeObjectURL(url);
+                      exportDiagramSVG(svgElement, title);
                     };
                     img.src = url;
                   }

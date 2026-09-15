@@ -17,16 +17,8 @@
    - **Luôn bọc nhãn đặc biệt trong nháy kép**: Khi nhãn có chứa ký tự `:`, `/`, `()`, `-`, `<`, `>`, khoảng trắng, bắt buộc phải viết:
      `NodeId["Nhãn hiển thị (Chi tiết / Lưu ý)"]`
    - **Tích hợp Spec UI Palette**: Sử dụng các `classDef` đồng bộ với màu Terracotta & Slate (`primary`, `client`, `service`, `database`, `cache`, `external`).
-3. **Bọc Sơ Đồ Đúng Wrapper**:
-   - Mọi khối mã `mermaid` đều phải được bọc trong `<div class="diagram-wrapper">`:
-
-     ````html
-     <div class="diagram-wrapper">```mermaid flowchart TD ...</div>
-     ````
-
-     </div>
-     ```
-
+3. **Định Dạng Sơ Đồ & Khung Wrapper**:
+   - Sử dụng khối mã Markdown chuẩn ` ```mermaid ` (trình biên dịch Docsify trong `index.html` tự động bọc thẻ `<div class="diagram-wrapper">` và kích hoạt đầy đủ tính năng).
    - Nhờ vậy, sơ đồ được tự động thừa hưởng tính năng co vừa khung 100%, Smart Toolbar (Zoom, Fit, Copy) và Fullscreen Modal Figma/Miro.
 
 ---

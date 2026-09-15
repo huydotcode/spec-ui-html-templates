@@ -76,15 +76,14 @@ Mỗi tệp tài liệu trong các thư mục con bắt buộc phải có đầy
 
 ### 2. Sơ Đồ Mermaid Trực Quan
 
-Bắt buộc bọc trong `<div class="diagram-wrapper">` và kèm chú thích caption:
+Sử dụng khối mã Markdown chuẩn ` ```mermaid ` kèm chú thích caption bên dưới (trình biên dịch Docsify tự động bọc thẻ `<div class="diagram-wrapper">` và kích hoạt đầy đủ Toolbar, Modal):
 
 - **Luồng tuần tự / Xác thực / Giao tiếp API** $\rightarrow$ Dùng `sequenceDiagram` (kèm `autonumber`).
 - **Luồng nghiệp vụ có rẽ nhánh điều kiện** $\rightarrow$ Dùng `flowchart TD` (Top-Down).
 - **Kiến trúc phân tầng / Cấu trúc module** $\rightarrow$ Dùng `graph TD` hoặc `graph LR`.
 
-```markdown
-<div class="diagram-wrapper">
-  <pre class="mermaid">
+````markdown
+```mermaid
 sequenceDiagram
     autonumber
     actor User as Người dùng
@@ -101,11 +100,10 @@ sequenceDiagram
     Auth-->>GW: Ký phát Access Token (JWT)
     GW-->>App: Phản hồi 200 OK (Token + Profile)
     App-->>User: Điều hướng vào Dashboard
-
-  </pre>
-  <div class="diagram-caption">Sơ đồ 1: Quy trình xác thực người dùng và cấp phát JWT token</div>
-</div>
 ```
+
+<div class="diagram-caption">Sơ đồ 1: Quy trình xác thực người dùng và cấp phát JWT token</div>
+````
 
 ### 3. Bảng Đặc Tả API & Tham Số Dữ Liệu
 

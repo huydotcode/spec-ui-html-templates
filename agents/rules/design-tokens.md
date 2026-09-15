@@ -1,47 +1,49 @@
 # Rule: Spec UI Design Tokens & Theme Standards (`design-tokens`)
 
-> **Quy tắc bất biến**: Hệ thống Spec UI sử dụng bảng màu ấm áp (Terracotta Warm Tone) được thiết kế đặc thù cho việc đọc tài liệu kỹ thuật dài mà không gây mỏi mắt. Mọi thành phần bổ sung phải tôn trọng triệt để hệ thống Token này.
+> **Quy tắc bất biến**: Hệ thống Spec UI sử dụng bộ Theme Tokens chuẩn hóa theo gam màu kem ấm (_Warm Terracotta Tone_) kết hợp hệ thống Đa giao diện (Multi-Theme Engine). Mọi thành phần tạo mới phải tuyệt đối tuân thủ hệ thống CSS Variables này, không tự ý viết mã màu hex cứng hay inline styles (`style="..."`).
 
 ---
 
-## 1. Bảng Màu Cốt Lõi (Color Palette Tokens)
+## 1. Bảng Biến Màu Cốt Lõi (Color Tokens)
 
-| Tên Token            |  Mã Hex   | Ý nghĩa & Vị trí ứng dụng                                                      |
-| :------------------- | :-------: | :----------------------------------------------------------------------------- |
-| `--color-primary`    | `#9f3f2a` | Màu nhấn chính, thương hiệu Spec UI, thanh active sidebar, viền callout chính. |
-| `--color-accent`     | `#c65a3a` | Màu nhấn phụ, hiệu ứng hover liên kết, nút bấm hành động.                      |
-| `--color-bg-main`    | `#faf7f2` | Màu nền tổng thể cổng tài liệu (Warm Cream Tone).                              |
-| `--color-bg-surface` | `#fffdf9` | Màu nền của các khối thẻ, panel nội dung, bảng biểu, diagram canvas.           |
-| `--color-text-main`  | `#2c2623` | Màu chữ chính, độ tương phản cao, êm dịu cho mắt.                              |
-| `--color-text-muted` | `#7a6e65` | Màu chữ phụ, mô tả ngắn, breadcrumb, chú thích nhỏ.                            |
-| `--color-border`     | `#e2d9cf` | Đường viền ngăn cách, viền bảng biểu, viền sơ đồ.                              |
+Các biến CSS chuẩn được khai báo tại `:root` trong `custom.css`:
+
+| Tên Biến CSS | Mã Hex Mặc Định | Ý Nghĩa Kỹ Thuật & Vị Trí Ứng Dụng                                             |
+| :----------- | :-------------: | :----------------------------------------------------------------------------- |
+| `--bg`       |    `#faf7f2`    | Màu nền tổng thể cổng tài liệu (Warm Cream). Tự đổi sang dark trong theme tối. |
+| `--surface`  |    `#fffdf9`    | Nền thẻ Card, Sidebar, Modal content, Diagram canvas.                          |
+| `--ink`      |    `#2b211e`    | Màu chữ chính, độ tương phản cao, dễ đọc.                                      |
+| `--muted`    |    `#7a6a61`    | Màu chữ phụ, mô tả ngắn, breadcrumb, caption sơ đồ.                            |
+| `--accent`   |    `#c65a3a`    | Màu nhấn Terracotta (Cam gạch): hover liên kết, nút bấm hành động.             |
+| `--accent-2` |    `#9f3f2a`    | Màu thương hiệu chính (Đỏ đất): trạng thái active sidebar, tiêu đề section.    |
+| `--accent-3` |    `#f2b66d`    | Màu vàng hổ phách: highlight cảnh báo, border accent phụ.                      |
+| `--line`     |    `#e3d8d0`    | Đường viền ngăn cách, viền bảng biểu, viền sơ đồ.                              |
 
 ---
 
-## 2. Quy Chuẩn Phông Chữ (Typography Tokens)
+## 2. Quy Chuẩn Phông Chữ (Typography Tokens — Clean Sans-Serif Standard)
+
+Hệ thống sử dụng **Be Vietnam Pro** (chuẩn hóa theo phong cách kỹ thuật hiện đại Stripe / Linear):
 
 - **Văn bản chung & Tiêu đề**:
-  `font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;`
-  - Tiêu đề cấp 1 (`h1`): Kích thước `2.25rem` (36px), độ đậm `700`, màu `#2c2623`.
-  - Tiêu đề cấp 2 (`h2`): Kích thước `1.5rem` (24px), độ đậm `600`, có gạch dưới nhẹ ngăn cách.
-  - Văn bản nội dung (`p`, `li`): Kích thước `1rem` (16px), chiều cao dòng `line-height: 1.65`.
+  `font-family: 'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;`
+  - Tiêu đề cấp 1 (`h1`): Độ đậm `700`, `letter-spacing: -0.025em`, màu `var(--ink)`.
+  - Tiêu đề cấp 2 (`h2`): Độ đậm `600`, `letter-spacing: -0.02em`, có viền gạch phân cách nhẹ.
+  - Văn bản nội dung (`p`, `li`): Kích thước `15px`, chiều cao dòng `line-height: 1.7`.
   - **Quy tắc "Non-AI"**: Tuyệt đối không chèn emoji hoạt hình vào tiêu đề các cấp (H1, H2, H3).
 - **Mã nguồn & Tham số (Code & Monospace)**:
   `font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;`
-  - Mã inline (trong dấu backtick `` ` ``): Nền `#f3ede4`, viền `#e2d9cf`, màu `#9f3f2a`.
+  - Mã inline (trong backticks `` `code` ``): Nền `var(--code-inline-background)`, màu `var(--code-inline-color)`.
 
 ---
 
 ## 3. Khoảng Cách & Bo Góc (Spacing & Radius)
 
 - **Bo góc (Border Radius)**:
-  - Huy hiệu (Badges): `4px`
-  - Nút bấm & Ô nhập: `6px`
-  - Hộp Callout & Sơ đồ Wrapper: `8px`
-- **Khoảng cách đệm (Padding)**:
-  - Callout: `16px 20px`
-  - Khối sơ đồ (`diagram-wrapper`): `24px`
-  - Ô bảng (`th`, `td`): `10px 14px`
+  - Khung Card lớn, Modal: `var(--radius)` (`18px`)
+  - Thành phần nhỏ (Nút bấm, Input, Callout, Badges): `var(--radius-sm)` (`12px` hoặc `99px` cho pill)
+- **Khoảng cách (Spacing)**:
+  - `--space-1`: `6px` | `--space-2`: `10px` | `--space-3`: `16px` | `--space-4`: `24px` | `--space-5`: `32px` | `--space-6`: `48px`
 
 ---
 

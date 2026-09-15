@@ -17,8 +17,15 @@ const MIME_TYPES = {
   ".png": "image/png",
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
+  ".gif": "image/gif",
+  ".webp": "image/webp",
+  ".avif": "image/avif",
   ".svg": "image/svg+xml",
   ".ico": "image/x-icon",
+  ".mp4": "video/mp4",
+  ".webm": "video/webm",
+  ".xml": "application/xml; charset=UTF-8",
+  ".map": "application/json; charset=UTF-8",
   ".woff": "font/woff",
   ".woff2": "font/woff2",
   ".ttf": "font/ttf",
@@ -47,7 +54,9 @@ if (ENABLE_LIVE_RELOAD) {
   // Gửi heartbeat ping mỗi 30 giây để giữ kết nối SSE
   setInterval(() => {
     for (const client of sseClients) {
-      client.write(": ping\n\n");
+      if (!client.destroyed && !client.writableEnded) {
+        client.write(": ping\n\n");
+      }
     }
   }, 30000).unref();
 
@@ -58,7 +67,9 @@ if (ENABLE_LIVE_RELOAD) {
     clearTimeout(debounceTimer);
     debounceTimer = setTimeout(() => {
       for (const client of sseClients) {
-        client.write("data: reload\n\n");
+        if (!client.destroyed && !client.writableEnded) {
+          client.write("data: reload\n\n");
+        }
       }
     }, 150);
   }
@@ -126,7 +137,8 @@ const server = http.createServer((req, res) => {
   const filePath = path.normalize(path.join(ROOT, pathname));
 
   // Chống Directory Traversal
-  if (!filePath.startsWith(ROOT)) {
+  const rel = path.relative(ROOT, filePath);
+  if (rel.startsWith("..") || path.isAbsolute(rel)) {
     res.writeHead(403, { "Content-Type": "text/plain; charset=UTF-8" });
     return res.end("Forbidden");
   }
@@ -172,7 +184,15 @@ const server = http.createServer((req, res) => {
 });
 
 server.on("error", (err) => {
-  console.error("[Spec UI] Loi Server:", err.message);
+  if (err.code === "EADDRINUSE") {
+    console.error(`\n[Spec UI] LOI: Cong ${PORT} dang duoc su dung boi mot tien trinh khac.`);
+    console.error(`[Spec UI] Vui long su dung cong khac bang cach chay:`);
+    console.error(`  - PowerShell (Windows): $env:PORT="${PORT + 1}"; node serve.cjs`);
+    console.error(`  - Bash (macOS/Linux):  PORT=${PORT + 1} node serve.cjs\n`);
+    process.exit(1);
+  } else {
+    console.error("[Spec UI] Loi Server:", err.message);
+  }
 });
 
 process.on("uncaughtException", (err) => {

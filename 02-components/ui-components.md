@@ -1,6 +1,6 @@
 # Các Thành Phần Đặc Tả (Spec UI Components)
 
-<span class="status-label stable">Component Reference v1.7</span>
+<span class="status-label stable">Component Reference v2.5.1</span>
 
 Tài liệu này tổng hợp toàn bộ các khối giao diện chuyên dụng được thiết kế riêng để biểu diễn API, quy trình nghiệp vụ, ma trận so sánh và các cảnh báo kỹ thuật trong hệ thống **Spec UI System**.
 

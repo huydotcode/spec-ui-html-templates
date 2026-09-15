@@ -12,13 +12,23 @@
   - [Thư Viện 5 Sơ Đồ Mẫu Chuẩn](03-diagram-templates/mermaid-gallery.md)
 
 - **04. AI Ruleset & Hướng Dẫn Prompt**
-  - [AI Ruleset v1.7 Chuẩn Hóa](04-ai-ruleset/ruleset-and-prompts.md)
+  - [AI Ruleset Chuẩn Hóa](04-ai-ruleset/ruleset-and-prompts.md)
   - [Cẩm Nang AI Master Prompt](AI-SPEC-WRITER-GUIDE.md)
 
 - **05. Hệ Thống Agentic AI**
   - [Agent Blueprint (AGENTS.md)](AGENTS.md)
   - [Claude Guidelines (CLAUDE.md)](CLAUDE.md)
-  - [Vai trò: Codebase Architect](agents/roles/codebase-architect.md)
-  - [Vai trò: Spec Writer](agents/roles/spec-writer.md)
-  - [Vai trò: Mermaid Engineer](agents/roles/mermaid-engineer.md)
-  - [Vai trò: QA Auditor](agents/roles/qa-auditor.md)
+  - **Chuyên Môn & Vai Trò (Roles)**
+    - [Codebase Architect](agents/roles/codebase-architect.md)
+    - [Spec Writer](agents/roles/spec-writer.md)
+    - [Mermaid Engineer](agents/roles/mermaid-engineer.md)
+    - [QA Auditor](agents/roles/qa-auditor.md)
+  - **Quy Tắc Bất Biến (Rules)**
+    - [Spec Components Rule](agents/rules/spec-components.md)
+    - [Mermaid Constraints Rule](agents/rules/mermaid-constraints.md)
+    - [Design Tokens Rule](agents/rules/design-tokens.md)
+  - **Kỹ Năng Thực Thi (Skills)**
+    - [Codebase Survey Skill](agents/skills/codebase-survey/SKILL.md)
+    - [Spec Authoring Skill](agents/skills/spec-authoring/SKILL.md)
+    - [Mermaid Design Skill](agents/skills/mermaid-design/SKILL.md)
+    - [Docs Verification Skill](agents/skills/docs-verification/SKILL.md)

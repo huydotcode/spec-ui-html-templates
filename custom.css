@@ -566,28 +566,45 @@ body::after {
   margin-right: 6px;
 }
 
-.callout.info {
+.callout.info,
+.callout.callout-info,
+.callout-info {
   background: rgba(242, 182, 109, 0.14);
   border-left: 4px solid var(--accent-3);
   color: var(--ink);
 }
 
-.callout.success {
+.callout.success,
+.callout.callout-success,
+.callout-success {
   background: rgba(16, 185, 129, 0.06);
   border-left: 4px solid #10b981;
   color: #064e3b;
 }
 
-.callout.warning {
+.callout.warning,
+.callout.callout-warning,
+.callout-warning {
   background: rgba(245, 158, 11, 0.06);
   border-left: 4px solid #f59e0b;
   color: #78350f;
 }
 
-.callout.danger {
+.callout.danger,
+.callout.callout-danger,
+.callout-danger {
   background: rgba(239, 68, 68, 0.06);
   border-left: 4px solid #ef4444;
   color: #7f1d1d;
+}
+
+.callout-title {
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.callout-content {
+  font-weight: 500;
 }
 
 /* Tip & Warning kiểu đơn giản */
@@ -626,27 +643,37 @@ body::after {
   margin: 3px 6px 3px 0;
 }
 
-.badge.get {
+.badge.get,
+.badge.badge-get,
+.badge-get {
   background: color-mix(in srgb, var(--success) 15%, transparent);
   color: var(--success);
   border: 1px solid color-mix(in srgb, var(--success) 32%, transparent);
 }
-.badge.post {
+.badge.post,
+.badge.badge-post,
+.badge-post {
   background: rgba(59, 130, 246, 0.15);
   color: #1e40af;
   border: 1px solid rgba(59, 130, 246, 0.3);
 }
-.badge.put {
+.badge.put,
+.badge.badge-put,
+.badge-put {
   background: rgba(245, 158, 11, 0.15);
   color: #b45309;
   border: 1px solid rgba(245, 158, 11, 0.3);
 }
-.badge.delete {
+.badge.delete,
+.badge.badge-delete,
+.badge-delete {
   background: rgba(239, 68, 68, 0.15);
   color: #b91c1c;
   border: 1px solid rgba(239, 68, 68, 0.3);
 }
-.badge.patch {
+.badge.patch,
+.badge.badge-patch,
+.badge-patch {
   background: rgba(139, 92, 246, 0.15);
   color: #5b21b6;
   border: 1px solid rgba(139, 92, 246, 0.3);
@@ -675,12 +702,17 @@ body::after {
   background: currentColor;
 }
 
-.status-label.stable {
+.status-label.stable,
+.badge.badge-stable,
+.badge-stable,
+.status-label.badge-stable {
   background: color-mix(in srgb, var(--success) 12%, transparent);
   color: var(--success);
   border-color: color-mix(in srgb, var(--success) 30%, transparent);
 }
-.status-label.review {
+.status-label.review,
+.badge.badge-beta,
+.badge-beta {
   background: color-mix(in srgb, var(--warning) 12%, transparent);
   color: #8a5719;
   border-color: color-mix(in srgb, var(--warning) 35%, transparent);
@@ -2081,4 +2113,108 @@ html[data-theme="solarized-paper"] .mermaid svg .label {
   height: 1px;
   background: var(--line);
   margin: 4px 6px;
+}
+
+/* ===== TỐI ƯU MOBILE RESPONSIVE (Diagram Toolbar & Modal) ===== */
+@media (max-width: 640px) {
+  .diagram-toolbar {
+    gap: 6px;
+    margin-bottom: 10px;
+    padding-bottom: 8px;
+  }
+  .diagram-toolbar-hint {
+    display: none !important;
+  }
+  .diagram-toolbar-actions {
+    gap: 4px;
+  }
+  .diagram-btn-action {
+    padding: 4px 7px;
+    gap: 3px;
+  }
+  .diagram-btn-action span {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .diagram-modal-header {
+    padding: 8px 12px;
+    gap: 6px;
+    flex-wrap: wrap;
+  }
+  .diagram-modal-title {
+    font-size: 0.85rem;
+  }
+  .diagram-modal-presets {
+    display: none !important;
+  }
+  .diagram-modal-controls .diagram-modal-divider {
+    margin: 0 2px;
+  }
+  .modal-native-fullscreen span,
+  .modal-export-svg span,
+  .modal-export-png span,
+  .modal-close span {
+    display: none;
+  }
+  .diagram-modal-footer {
+    padding: 6px 10px;
+    font-size: 0.72rem;
+  }
+}
+
+/* ===== DRAW.IO CONTAINER THEME STYLING ===== */
+.mxgraph {
+  transition:
+    background-color 0.25s ease,
+    border-color 0.25s ease;
+}
+html[data-theme-mode="dark"] .mxgraph {
+  background-color: var(--surface) !important;
+  border-color: var(--line) !important;
+}
+
+/* ===== IN ẤN & XUẤT PDF CHUYÊN NGHIỆP (PRINT STYLESHEET) ===== */
+@media print {
+  #spec-ui-theme-switcher,
+  .diagram-toolbar,
+  .docsify-copy-code-button,
+  .sidebar-toggle,
+  .sidebar,
+  .app-nav,
+  .diagram-modal,
+  .pagination-item {
+    display: none !important;
+  }
+
+  body,
+  .content,
+  .markdown-section {
+    background: #ffffff !important;
+    color: #111827 !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    max-width: 100% !important;
+  }
+
+  .diagram-wrapper {
+    box-shadow: none !important;
+    border: 1px solid #d1d5db !important;
+    background: #ffffff !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
+
+  a {
+    color: #111827 !important;
+    text-decoration: underline !important;
+  }
+
+  .callout {
+    border-left-width: 4px !important;
+    box-shadow: none !important;
+    page-break-inside: avoid;
+    break-inside: avoid;
+  }
 }

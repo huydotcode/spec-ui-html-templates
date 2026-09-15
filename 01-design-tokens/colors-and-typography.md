@@ -1,6 +1,6 @@
 # Hệ Thống Design Tokens (Màu Sắc, Typography & Spacing)
 
-<span class="status-label stable">Design Tokens v1.7</span>
+<span class="status-label stable">Design Tokens v2.5.1</span>
 
 Design Tokens là tập hợp các biến giá trị nguyên tử (Atomic Values) được chuẩn hóa để duy trì sự nhất quán về màu sắc, kiểu chữ và khoảng cách trong toàn bộ hệ sinh thái tài liệu kỹ thuật **Spec UI System**.
 

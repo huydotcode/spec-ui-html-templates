@@ -18,7 +18,8 @@ Mỗi tệp tài liệu module `.md` được tạo ra phải bao gồm đầy �
 - Tiêu đề cấp 1 (`# Tên Module / Tính Năng`).
 - Hàng nhãn trạng thái và phương thức:
   ```html
-  <span class="status-label stable">Hoạt động ổn định</span> <span class="badge post">POST</span>
+  <span class="status-label stable">Hoạt động ổn định</span>
+  <span class="badge post">POST</span>
   ```
 - Đoạn tóm tắt mục tiêu nghiệp vụ (1–2 câu súc tích).
 
@@ -33,8 +34,7 @@ Mỗi tệp tài liệu module `.md` được tạo ra phải bao gồm đầy �
 - Tích hợp Callout cảnh báo rủi ro hoặc lưu ý kiến trúc:
   ```html
   <div class="callout warning">
-    <i class="ti ti-alert-triangle"></i> <strong>Lưu ý bảo mật & Rate Limiting:</strong> Nếu người dùng nhập sai mật khẩu quá 5 lần liên
-    tiếp, hệ thống sẽ tự động khóa tài khoản tạm thời trong 15 phút qua Redis key với TTL 900s.
+    <i class="ti ti-alert-triangle"></i> <strong>Lưu ý bảo mật & Rate Limiting:</strong> Nếu người dùng nhập sai mật khẩu quá 5 lần liên tiếp, hệ thống sẽ tự động khóa tài khoản tạm thời trong 15 phút qua Redis key với TTL 900s.
   </div>
   ```
 
@@ -65,11 +65,11 @@ sequenceDiagram
 - Lập bảng chi tiết các tham số Request Header, Query, Path, Body và Response Payload.
 - Sử dụng bảng Markdown kết hợp `<span class="required-star">*</span>`:
   ```markdown
-  | Tên trường    | Kiểu dữ liệu |                Bắt buộc                 | Mặc định | Mô tả & Ràng buộc                                                   |
-  | :------------ | :----------- | :-------------------------------------: | :------- | :------------------------------------------------------------------ |
-  | `email`       | `string`     | Có<span class="required-star">\*</span> | -        | Địa chỉ email RFC 5322 hợp lệ, độ dài tối đa 255 ký tự.             |
-  | `password`    | `string`     | Có<span class="required-star">\*</span> | -        | Tối thiểu 8 ký tự, gồm ít nhất 1 chữ hoa, 1 số và 1 ký tự đặc biệt. |
-  | `remember_me` | `boolean`    |                  Không                  | `false`  | Nếu `true`, Refresh Token có hạn 30 ngày (thay vì 1 ngày).          |
+  | Tên trường | Kiểu dữ liệu | Bắt buộc | Mặc định | Mô tả & Ràng buộc |
+  | :--- | :--- | :---: | :--- | :--- |
+  | `email` | `string` | Có<span class="required-star">*</span> | - | Địa chỉ email RFC 5322 hợp lệ, độ dài tối đa 255 ký tự. |
+  | `password` | `string` | Có<span class="required-star">*</span> | - | Tối thiểu 8 ký tự, gồm ít nhất 1 chữ hoa, 1 số và 1 ký tự đặc biệt. |
+  | `remember_me` | `boolean` | Không | `false` | Nếu `true`, Refresh Token có hạn 30 ngày (thay vì 1 ngày). |
   ```
 
 ### Phần 5: Hướng Dẫn Triển Khai & Code Snippet / Migration Guide
@@ -89,19 +89,14 @@ sequenceDiagram
 - Nếu có so sánh (Trước vs Sau hoặc Legacy vs Modern), có thể sử dụng cấu trúc Docsify Tabs:
   ````markdown
   <!-- tabs:start -->
-
   #### **Hệ Thống Cũ**
-
   ```typescript
   // Legacy code
   ```
-
   #### **Hệ Thống Mới**
-
   ```typescript
   // Modern code
   ```
-
   <!-- tabs:end -->
   ````
 
