@@ -1,14 +1,14 @@
 - [Trang chủ](/)
 - [Changelog](CHANGELOG.md)
-- 🎨 Design Tokens & Components
+- Design Tokens & Components
   - [Design Tokens](01-design-tokens/colors-and-typography.md)
   - [UI Components](02-components/ui-components.md)
-- 📊 Sơ Đồ Mermaid
+- Sơ Đồ Mermaid
   - [Thư Viện Sơ Đồ Mẫu](03-diagram-templates/mermaid-gallery.md)
-- 🤖 AI Guide
+- AI Guide
   - [AI Ruleset v1.7](04-ai-ruleset/ruleset-and-prompts.md)
   - [Master Prompt Guide](AI-SPEC-WRITER-GUIDE.md)
-- 👥 Agent Setup
+- Agent Setup
   - [Agent Blueprint (AGENTS.md)](AGENTS.md)
   - [Claude Guidelines (CLAUDE.md)](CLAUDE.md)
   - [Roles & Personas](agents/roles/codebase-architect.md)

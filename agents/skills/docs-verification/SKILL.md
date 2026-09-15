@@ -9,7 +9,7 @@ Kỹ năng này hướng dẫn Agent cách thực hiện quy trình kiểm thử
 
 ---
 
-## 🎯 Quy Trình Kiểm Thử Từng Bước
+## Quy Trình Kiểm Thử Từng Bước
 
 ### Bước 1: Rà Soát Liên Kết Nội Bộ (Broken Link Check)
 
@@ -26,6 +26,7 @@ Kỹ năng này hướng dẫn Agent cách thực hiện quy trình kiểm thử
    - `<span class="badge ...">` → `</span>`
 2. Đảm bảo có dòng trắng (empty line) giữa thẻ HTML và nội dung Markdown lồng bên trong (nếu có), giúp parser Docsify nhận diện chính xác.
 3. Kiểm tra không có thuộc tính `style="..."` tự phát.
+4. **Kiểm tra Typography & Icons**: Đảm bảo không có emoji hoạt hình ở tiêu đề H1, H2, H3 hoặc menu điều hướng; chỉ sử dụng Tabler Icons (`<i class="ti ti-..."></i>`) cho mục đích công năng.
 
 ### Bước 3: Rà Soát Cú Pháp Mermaid & Code Blocks
 
@@ -51,14 +52,15 @@ Kỹ năng này hướng dẫn Agent cách thực hiện quy trình kiểm thử
 
 ---
 
-## 📋 Báo Cáo Nghiệm Thu Mẫu
+## Báo Cáo Nghiệm Thu Mẫu
 
 Khi hoàn thành nghiệm thu, Agent xuất bản bảng báo cáo kiểm thử với các tiêu chí:
 
-| Tiêu chí                     | Trạng thái | Ghi chú kiểm thử                                        |
-| :--------------------------- | :--------: | :------------------------------------------------------ |
-| **Cấu trúc thư mục & Files** |  ✅ PASS   | Đầy đủ tệp theo Bounded Contexts                        |
-| **Tính toàn vẹn liên kết**   |  ✅ PASS   | 100% link trong `_sidebar.md` hợp lệ                    |
-| **Cú pháp Mermaid**          |  ✅ PASS   | Đã khử mũi tên ngược, bọc wrapper chuẩn                 |
-| **Giao diện & Spec UI CSS**  |  ✅ PASS   | Không dùng inline styles, hiển thị đủ thẻ Callout/Badge |
-| **Local Server**             |  ✅ PASS   | Chạy ổn định trên Node.js/Bun thuần                     |
+| Tiêu chí                     | Trạng thái | Ghi chú kiểm thử                                          |
+| :--------------------------- | :--------: | :-------------------------------------------------------- |
+| **Cấu trúc thư mục & Files** |  ✅ PASS   | Đầy đủ tệp theo Bounded Contexts                          |
+| **Tính toàn vẹn liên kết**   |  ✅ PASS   | 100% link trong `_sidebar.md` hợp lệ                      |
+| **Cú pháp Mermaid**          |  ✅ PASS   | Đã khử mũi tên ngược, bọc wrapper chuẩn                   |
+| **Giao diện & Spec UI CSS**  |  ✅ PASS   | Không dùng inline styles, hiển thị đủ thẻ Callout/Badge   |
+| **Chuẩn mực Typography**     |  ✅ PASS   | Không có emoji ở tiêu đề, Tabler Icons hiển thị chính xác |
+| **Local Server**             |  ✅ PASS   | Chạy ổn định trên Node.js/Bun thuần                       |

@@ -4,11 +4,37 @@ Tất cả các thay đổi đáng chú ý của dự án **Spec UI System** s�
 
 Định dạng tài liệu tuân thủ theo tiêu chuẩn [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) và tuân theo [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [2.1.0] - 2026-09-15
+## [2.2.0] - 2026-09-15
 
-### ⚡ Zero-Dependency Live Reload Server
+### Chuẩn Hóa Tabler Icons & Thiết Kế "Non-AI" (Clean Typography)
 
 #### Đã Thêm Mới (Added)
+
+- **Tích hợp Tabler Icons Webfont (CDN)**:
+  - Nhúng stylesheet `@tabler/icons-webfont` trực tiếp trong `index.html`.
+  - Hỗ trợ cú pháp `<i class="ti ti-[tên-icon]"></i>` trong toàn bộ tài liệu Markdown, Callouts và giao diện điều khiển.
+- **Chuẩn hóa Smart Diagram Toolbar & Fullscreen Modal**:
+  - Chuyển đổi toàn bộ nút bấm thanh công cụ (Xem kích thước gốc, Thu vừa khung, Toàn màn hình) và bộ điều khiển Modal (Zoom in, Zoom out, Vừa khung, Đóng Esc) sang Tabler Icons vector nét thanh, bo tròn chuẩn 24x24.
+  - Loại bỏ hoàn toàn các emoji `🔍`, `📐`, `💡` trong UI điều khiển sơ đồ.
+- **Quy tắc "Non-AI" Guardrail trong AI Ruleset**:
+  - Bổ sung quy định bắt buộc trong `AGENTS.md`, `CLAUDE.md`, `AI-SPEC-WRITER-GUIDE.md` và `04-ai-ruleset/ruleset-and-prompts.md`: Nghiêm cấm chèn emoji trang trí vào tiêu đề (H1, H2, H3) và thanh điều hướng.
+  - Biểu tượng chỉ được phép sử dụng khi có mục đích công năng thực tế (Functional Cues).
+
+#### Đã Thay Đổi (Changed)
+
+- **Thanh lọc toàn diện Emoji ở các tiêu đề**:
+  - Loại bỏ toàn bộ emoji trang trí ở tiêu đề H1/H2/H3 trong `README.md`, `_navbar.md`, `01-design-tokens/`, `02-components/`, `03-diagram-templates/`, `04-ai-ruleset/` và các hồ sơ Agent.
+  - Trả lại sự trang nhã, nghiêm túc và đẳng cấp cho hệ thống Typography (Lora + Be Vietnam Pro).
+- **Nâng cấp Callout Boxes**: Bổ sung icon Tabler tinh tế vào đầu các hộp ghi chú (`info-circle`, `circle-check`, `alert-triangle`, `alert-circle`).
+
+---
+
+## [2.1.0] - 2026-09-15
+
+### Zero-Dependency Live Reload Server
+
+#### Đã Thêm Mới (Added)
+
 - **Tích hợp Live Reload tự động vào `serve.cjs`**:
   - Hỗ trợ cơ chế Server-Sent Events (SSE) qua endpoint `GET /__livereload`.
   - Tự động theo dõi tệp bằng `fs.watch` nguyên bản (hỗ trợ debounce 150ms, theo dõi các tệp `.md`, `.css`, `.html`, `.js`, `.json`, `.svg`, `.png`, `.jpg`).
@@ -19,7 +45,7 @@ Tất cả các thay đổi đáng chú ý của dự án **Spec UI System** s�
 
 ## [2.0.0] - 2026-09-15
 
-### 🚀 Major Architecture Overhaul (Chuyển Đổi Sang Docsify Portal & Agentic AI)
+### Major Architecture Overhaul (Chuyển Đổi Sang Docsify Portal & Agentic AI)
 
 #### Đã Thêm Mới (Added)
 

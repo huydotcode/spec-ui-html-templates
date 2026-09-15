@@ -9,7 +9,7 @@ Kỹ năng này hướng dẫn Agent cách quét toàn diện một dự án b�
 
 ---
 
-## 🎯 Quy Trình Thực Hiện Từng Bước
+## Quy Trình Thực Hiện Từng Bước
 
 ### Bước 1: Quét Manifest & Nhận Diện Tech Stack
 

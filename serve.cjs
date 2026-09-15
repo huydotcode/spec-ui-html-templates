@@ -89,7 +89,7 @@ if (ENABLE_LIVE_RELOAD) {
       }
     });
   } catch (err) {
-    console.warn("⚠️ Cảnh báo: Không thể khởi tạo File Watcher tự động:", err.message);
+    console.warn("[Spec UI] Canh bao: Khong the khoi tao File Watcher tu dong:", err.message);
   }
 }
 
@@ -156,8 +156,8 @@ const server = http.createServer((req, res) => {
 });
 
 server.listen(PORT, () => {
-  console.log(`🚀 Tài liệu đang chạy tại: http://localhost:${PORT}`);
+  console.log(`[Spec UI] Tai lieu dang chay tai: http://localhost:${PORT}`);
   if (ENABLE_LIVE_RELOAD) {
-    console.log(`🔄 Tính năng Live Reload: ĐANG BẬT (Tự động tải lại khi sửa file)`);
+    console.log(`[Spec UI] Live Reload: DANG BAT (Tu dong tai lai khi sua file)`);
   }
 });

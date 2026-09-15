@@ -6,7 +6,7 @@ Tài liệu này là **Master Prompt & Blueprint** dành cho các trợ lý lậ
 
 ---
 
-## 🎯 1. Nguyên Tắc Cốt Lõi (Core Principles)
+## 1. Nguyên Tắc Cốt Lõi (Core Principles)
 
 1. **Ngôn ngữ & Giọng văn**: Sử dụng Tiếng Việt kỹ thuật chuyên nghiệp, chuẩn mực, rõ ràng, gãy gọn; giữ nguyên các thuật ngữ chuyên ngành chuẩn tiếng Anh (e.g. _Middleware, Dependency Injection, State Management, JWT, Idempotency, Single Source of Truth_).
 2. **Tập trung vào "Logic Ngầm" (Hidden Business Logic)**: Không chỉ mô tả lại những gì hiển thị trên màn hình hoặc copy lại code hời hợt. AI phải đào sâu vào mã nguồn để bóc tách:
@@ -15,10 +15,11 @@ Tài liệu này là **Master Prompt & Blueprint** dành cho các trợ lý lậ
    - Luồng dữ liệu ngầm (Background jobs, event bus, database triggers, cache synchronization).
 3. **Trực quan hóa 100% bằng Sơ đồ (Diagram First)**: Mọi chức năng chính hoặc luồng dữ liệu đều phải có sơ đồ Mermaid tương ứng bọc trong `<div class="diagram-wrapper">`.
 4. **Chuẩn hóa thành phần (Component Consistency)**: Tuyệt đối tuân thủ hệ thống thẻ Spec UI (Callout, HTTP Badges, Status Labels, Tabs).
+5. **Phong cách thiết kế "Non-AI" (Sạch sẽ, không Emoji)**: Tuyệt đối không chèn emoji hoạt hình vào tiêu đề các cấp (H1, H2, H3) và thanh điều hướng. Giữ typography sạch sẽ, nghiêm túc. Chỉ dùng Tabler Icons (`<i class="ti ti-..."></i>`) cho các thành phần công năng (Callouts, Badges, Status labels).
 
 ---
 
-## 🧭 2. Quy Trình 4 Bước Phân Tích Hệ Thống (4-Step Workflow)
+## 2. Quy Trình 4 Bước Phân Tích Hệ Thống (4-Step Workflow)
 
 ```dot
 digraph workflow {
@@ -54,11 +55,11 @@ Phân chia tài liệu thành **6 đến 10 nhóm nghiệp vụ (Bounded Context
 - `09-devops-infrastructure`: Triển khai, CI/CD, Containerization, Giám sát, Logging.
 - `10-migration-roadmap`: Ma trận đối chiếu tính năng, mapping công nghệ cũ sang mới, kế hoạch chuyển đổi.
 
-👉 Cập nhật danh mục các tệp này vào `_sidebar.md` và `_navbar.md`.
+→ Cập nhật danh mục các tệp này vào `_sidebar.md` và `_navbar.md`.
 
 ---
 
-## 📝 3. Cấu Trúc Bắt Buộc Của Một Tệp Tài Liệu Module (`.md`)
+## 3. Cấu Trúc Bắt Buộc Của Một Tệp Tài Liệu Module (`.md`)
 
 Mỗi tệp tài liệu trong các thư mục con bắt buộc phải có đầy đủ **5 phần** sau:
 
@@ -126,7 +127,7 @@ Sử dụng HTTP Badges chuẩn:
 
 ### 4. Hộp Cảnh Báo & Logic Ngầm (Callouts)
 
-Sử dụng đúng phân cấp màu sắc:
+Sử dụng đúng phân cấp màu sắc và tích hợp biểu tượng Tabler Icons:
 
 - `<div class="callout info">`: Thông tin cấu hình, port mặc định, ghi chú kỹ thuật.
 - `<div class="callout success">`: Kết quả kỳ vọng, SLA, tối ưu hiệu năng.
@@ -135,7 +136,7 @@ Sử dụng đúng phân cấp màu sắc:
 
 ```markdown
 <div class="callout warning">
-  <strong>Logic ngầm quan trọng:</strong> Hệ thống tự động khóa tài khoản tạm thời 15 phút nếu nhập sai mật khẩu quá 5 lần liên tiếp. Bộ đếm được lưu tại Redis với TTL 900s.
+  <i class="ti ti-alert-triangle"></i> <strong>Logic ngầm quan trọng:</strong> Hệ thống tự động khóa tài khoản tạm thời 15 phút nếu nhập sai mật khẩu quá 5 lần liên tiếp. Bộ đếm được lưu tại Redis với TTL 900s.
 </div>
 ```
 
@@ -154,7 +155,6 @@ function getUser(id) {
   return http.get("/users/" + id);
 }
 ```
-````
 
 #### **Hệ Thống Đề Xuất (Target Implementation)**
 
@@ -167,16 +167,16 @@ export async function getUser(id: string): Promise<UserResponse> {
 ```
 
 <!-- tabs:end -->
-
 ````
 
 ---
 
-## 🤖 4. Các Mẫu Lệnh Prompt Dành Cho Người Dùng (Ready-to-Use Prompts)
+## 4. Các Mẫu Lệnh Prompt Dành Cho Người Dùng (Ready-to-Use Prompts)
 
 Người dùng có thể sao chép trực tiếp các mẫu prompt dưới đây để giao nhiệm vụ cho AI:
 
 ### Prompt Khảo Sát & Khởi Tạo Dự Án (One-Shot Bootstrap Prompt)
+
 ```text
 Bạn là chuyên gia Kiến trúc Phần mềm cấp cao (Principal Software Architect).
 Hãy đọc kỹ tệp AI-SPEC-WRITER-GUIDE.md trong dự án này.
@@ -185,27 +185,28 @@ Nhiệm vụ của bạn:
 1. Khảo sát toàn bộ mã nguồn của dự án hiện tại (quét package configs, router, controllers, models, store).
 2. Phân tích kiến trúc tổng thể và phân rã hệ thống thành 6-10 Domain Bounded Contexts.
 3. Cập nhật tệp docs/README.md với bảng Ma trận Hệ thống thực tế của dự án.
-4. Cập nhật tệp docs/_sidebar.md và docs/_navbar.md với đầy đủ danh mục các chương và bài viết cần viết.
+4. Cập nhật tệp docs/_sidebar.md và docs/_navbar.md với đầy đủ danh mục các chương và bài viết cần viết (tuyệt đối không chèn emoji vào tiêu đề).
 5. Chưa cần viết toàn bộ các file con, hãy xuất bản cấu trúc mục lục hoàn chỉnh để tôi duyệt trước.
-````
+```
 
 ### Prompt Viết Chi Tiết Từng Chương (Deep-Dive Authoring Prompt)
 
 ```text
 Dựa trên mục lục đã thống nhất tại docs/_sidebar.md và các quy chuẩn trong AI-SPEC-WRITER-GUIDE.md, hãy bắt đầu viết chi tiết toàn bộ các tệp tài liệu trong chương:
-👉 [Nhập tên chương, ví dụ: 01-foundation hoặc 02-identity-access]
+→ [Nhập tên chương, ví dụ: 01-foundation hoặc 02-identity-access]
 
 Yêu cầu bắt buộc:
 - Đào sâu mã nguồn thực tế để bóc tách các logic ngầm, không viết chung chung lý thuyết.
 - Bắt buộc có sơ đồ Mermaid (flowchart hoặc sequence) bọc trong <div class="diagram-wrapper">.
 - Có bảng endpoint API với HTTP badges hoặc bảng tham số I/O.
-- Có callout warning cho các edge-cases thực tế tìm thấy trong code.
+- Có callout warning cho các edge-cases thực tế tìm thấy trong code (kèm icon Tabler).
 - Có khối code so sánh <!-- tabs:start --> nếu liên quan đến migration.
+- Tuyệt đối giữ typography sạch sẽ, không dùng emoji hoạt hình ở tiêu đề H1, H2, H3.
 ```
 
 ---
 
-## ⚡ 5. Quy Chuẩn Kỹ Thuật Khi Viết Mermaid (Tránh Lỗi Syntax Error)
+## 5. Quy Chuẩn Kỹ Thuật Khi Viết Mermaid (Tránh Lỗi Syntax Error)
 
 1. **Tuyệt đối không dùng mũi tên ngược**: Không dùng `<-` hoặc `<--` trong flowchart. Luôn viết mũi tên xuôi `-->` và đảo vị trí nút.
 2. **Ký tự đặc biệt trong nhãn**: Nếu nhãn nút có chứa dấu gạch chéo `/`, ngoặc tròn `()`, ngoặc kép `""` hoặc dấu hai chấm `:`, bắt buộc bọc văn bản trong dấu nháy kép `""`, ví dụ: `A["Đăng nhập (OTP / SMS)"] --> B`.

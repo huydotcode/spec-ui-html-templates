@@ -1,6 +1,6 @@
 {
   "name": "spec-ui-html-templates",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "System Spec UI System - Technical documentation and specification templates with zero-dependency server, Mermaid sanitizer, and interactive diagram modal.",
   "scripts": {
     "start": "node serve.cjs"

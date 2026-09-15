@@ -6,7 +6,7 @@ Design Tokens là tập hợp các biến giá trị nguyên tử (Atomic Values
 
 ---
 
-## 🎨 1. Bảng Màu Chuẩn (Color Tokens)
+## 1. Bảng Màu Chuẩn (Color Tokens)
 
 Hệ thống sử dụng gam màu kem ấm (_Warm Cream & Terracotta_) sang trọng, thân thiện với mắt khi đọc tài liệu kỹ thuật dài.
 
@@ -22,12 +22,12 @@ Hệ thống sử dụng gam màu kem ấm (_Warm Cream & Terracotta_) sang tr�
 | `--line`     |    `#e3d8d0`     | Đường viền ngăn cách nhẹ nhàng giữa các khối       |             <span style="display:inline-block;width:32px;height:20px;background:#e3d8d0;border-radius:4px;"></span>              |
 
 <div class="callout info">
-  <strong>Gợi ý:</strong> Khi viết CSS tùy chỉnh, luôn sử dụng biến <code>var(--tên-token)</code> thay vì viết mã màu Hex cứng để đảm bảo tính đồng bộ khi thay đổi theme.
+  <i class="ti ti-info-circle"></i> <strong>Gợi ý:</strong> Khi viết CSS tùy chỉnh, luôn sử dụng biến <code>var(--tên-token)</code> thay vì viết mã màu Hex cứng để đảm bảo tính đồng bộ khi thay đổi theme.
 </div>
 
 ---
 
-## ✍️ 2. Hệ Thống Kiểu Chữ (Typography Tokens)
+## 2. Hệ Thống Kiểu Chữ (Typography Tokens)
 
 Hệ thống kết hợp tinh tế giữa 3 họ font chữ phục vụ cho từng mục đích cụ thể:
 
@@ -50,7 +50,7 @@ Hệ thống kết hợp tinh tế giữa 3 họ font chữ phục vụ cho từ
 
 ---
 
-## 📏 3. Khoảng Cách & Lưới (Spacing Tokens)
+## 3. Khoảng Cách & Lưới (Spacing Tokens)
 
 Hệ thống Spacing tuân thủ tỉ lệ bước nhảy chuẩn hóa, giúp bố cục thông thoáng và mạch lạc:
 
@@ -64,5 +64,17 @@ Hệ thống Spacing tuân thủ tỉ lệ bước nhảy chuẩn hóa, giúp b�
 | `--space-6` |   `48px`   | Khoảng cách phân cách giữa các Section chính        |
 
 <div class="callout success">
-  <strong>Quy tắc bo góc (Border Radius):</strong> Thẻ lớn dùng <code>--radius: 18px</code> (khung Card, Modal); thành phần nhỏ dùng <code>--radius-sm: 12px</code> (nút bấm, ô tìm kiếm, callout).
+  <i class="ti ti-circle-check"></i> <strong>Quy tắc bo góc (Border Radius):</strong> Thẻ lớn dùng <code>--radius: 18px</code> (khung Card, Modal); thành phần nhỏ dùng <code>--radius-sm: 12px</code> (nút bấm, ô tìm kiếm, callout).
 </div>
+
+---
+
+## 4. Biểu Tượng Chuẩn Hóa (Tabler Icons Tokens)
+
+Hệ thống sử dụng bộ **Tabler Icons (Webfont CDN)** với triết lý thiết kế công năng và tối giản ("Non-AI Aesthetics"):
+
+- **Cú pháp sử dụng**: `<i class="ti ti-[tên-icon]"></i>` (Ví dụ: `<i class="ti ti-info-circle"></i>`, `<i class="ti ti-arrows-maximize"></i>`).
+- **Nguyên tắc "Không AI"**:
+  - Tuyệt đối không chèn emoji hoạt hình hoặc icon trang trí vào tiêu đề các cấp (H1, H2, H3) và thanh điều hướng.
+  - Icon chỉ xuất hiện khi phục vụ một mục đích công năng rõ rệt (chỉ dẫn trạng thái Callout, nút bấm Toolbar, công cụ phóng to/thu nhỏ, điều hướng phân trang).
+- **Quy chuẩn hiển thị**: Nét vẽ `stroke-width: 1.5px - 2px`, tự động thừa hưởng màu chữ qua `currentColor`.

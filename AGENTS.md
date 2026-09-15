@@ -4,7 +4,7 @@
 
 ---
 
-## 🎯 1. Bản Chất Dự Án & Bối Cảnh Hệ Thống
+## 1. Bản Chất Dự Án & Bối Cảnh Hệ Thống
 
 **Spec UI System** là hệ thống tài liệu đặc tả kỹ thuật và phân tích kiến trúc phần mềm chuyên nghiệp, vận hành dưới dạng **Cổng tài liệu Docsify Portal đa trang (Multi-page Markdown Portal)** kết hợp:
 
@@ -14,7 +14,7 @@
 
 ---
 
-## 🤖 2. Phân Nhiệm Các Vai Trò Chuyên Biệt (Specialized Agent Personas)
+## 2. Phân Nhiệm Các Vai Trò Chuyên Biệt (Specialized Agent Personas)
 
 Khi xử lý một dự án tài liệu hóa, Agent cần linh hoạt kích hoạt một trong 4 vai trò chuyên biệt (hoặc phân rã subagent tương ứng):
 
@@ -55,7 +55,7 @@ Khi xử lý một dự án tài liệu hóa, Agent cần linh hoạt kích ho�
 
 ---
 
-## 🧭 3. Quy Trình 4 Bước Tiêu Chuẩn (Standard Operating Procedure)
+## 3. Quy Trình 4 Bước Tiêu Chuẩn (Standard Operating Procedure)
 
 Mọi Agent khi nhận nhiệm vụ phân tích một codebase mới **BẮT BUỘC** phải tuân thủ đúng quy trình:
 
@@ -74,7 +74,7 @@ Mọi Agent khi nhận nhiệm vụ phân tích một codebase mới **BẮT BU�
 
 ---
 
-## 🚫 4. Các Giới Hạn An Toàn Bắt Buộc (Hard Guardrails & Constraints)
+## 4. Các Giới Hạn An Toàn Bắt Buộc (Hard Guardrails & Constraints)
 
 Agent **TUYỆT ĐỐI KHÔNG** được vi phạm các quy tắc sau:
 
@@ -87,10 +87,11 @@ Agent **TUYỆT ĐỐI KHÔNG** được vi phạm các quy tắc sau:
    - Cơ chế bảo mật ngầm (Token, Hashing, Encryption).
    - Điểm nghẽn hiệu năng, điều kiện rẽ nhánh và các edge-cases thực tế.
 6. **Không phá vỡ cấu trúc 5 phần của tài liệu module**: Mọi tệp `.md` đều phải có Header Status, Tóm tắt logic, Sơ đồ Mermaid, Bảng API/tham số, Callout cảnh báo và Code Tabs đối chiếu nếu có.
+7. **Tuyệt đối không dùng Emoji ở tiêu đề và thanh điều hướng ("Non-AI" Guardrail)**: Nghiêm cấm chèn emoji hoạt hình (🚀, 🎯, ⚡, 🎨, 📢, 🤖...) vào các tiêu đề H1, H2, H3, `_sidebar.md` hay `_navbar.md`. Giữ typography sạch sẽ, nghiêm túc (chuẩn Stripe/Linear). Chỉ sử dụng **Tabler Icons** (`<i class="ti ti-..."></i>`) cho các thành phần mang tính công năng (Callout, Nút bấm, Status labels).
 
 ---
 
-## 📋 5. Bảng Tra Cứu Lệnh Điều Khiển Nhanh
+## 5. Bảng Tra Cứu Lệnh Điều Khiển Nhanh
 
 | Hành động                   | Lệnh thực thi                         | Mục đích                                           |
 | :-------------------------- | :------------------------------------ | :------------------------------------------------- |
@@ -101,7 +102,7 @@ Agent **TUYỆT ĐỐI KHÔNG** được vi phạm các quy tắc sau:
 
 ---
 
-## 📂 6. Thư Mục Tài Liệu Tham Chiếu Dành Cho Agent
+## 6. Thư Mục Tài Liệu Tham Chiếu Dành Cho Agent
 
 - **Vai trò chuyên biệt**: [`agents/roles/`](agents/roles/)
 - **Kỹ năng thực thi**: [`agents/skills/`](agents/skills/)

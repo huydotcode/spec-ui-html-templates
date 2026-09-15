@@ -76,8 +76,20 @@ Ví dụ:
 Mọi khối `mermaid` đều **BẮT BUỘC** phải nằm bên trong `<div class="diagram-wrapper">`:
 
 ````html
-<div class="diagram-wrapper">```mermaid flowchart TD ...</div>
-````
+<div class="diagram-wrapper">
+```mermaid
+flowchart TD
+  ...
+```
+</div>
+
+---
+
+## 5. Biểu Tượng Công Năng (Tabler Icons)
+
+- Sử dụng cú pháp Tabler Icons Webfont: `<i class="ti ti-[tên-icon]"></i>`.
+- **Nguyên tắc "Non-AI"**: Tuyệt đối không dùng emoji hoạt hình trong tiêu đề hoặc làm icon trang trí. Chỉ dùng icon Tabler cho mục đích công năng thực sự (trong Callout, nút bấm, bảng trạng thái).
 
 </div>
 ```
+````

@@ -4,7 +4,7 @@
 
 ---
 
-## 🎯 Mục Tiêu & Trách Nhiệm Cốt Lõi
+## Mục Tiêu & Trách Nhiệm Cốt Lõi
 
 1. **Thiết Kế Sơ Đồ Trực Quan Đạt Chuẩn Spec UI**:
    - Biến đổi các luồng logic phức tạp, quan hệ dữ liệu và kiến trúc triển khai thành các sơ đồ Mermaid chuyên nghiệp:
@@ -31,7 +31,7 @@
 
 ---
 
-## 🛠️ Công Cụ & Kỹ Năng Kích Hoạt
+## Công Cụ & Kỹ Năng Kích Hoạt
 
 - **Skill chính**: [`agents/skills/mermaid-design/SKILL.md`](../skills/mermaid-design/SKILL.md)
 - **Rules phối hợp**:
@@ -40,7 +40,7 @@
 
 ---
 
-## 📋 Checklist Đầu Ra Của `@mermaid-engineer`
+## Checklist Đầu Ra Của `@mermaid-engineer`
 
 - [ ] Cú pháp hợp lệ, không chứa mũi tên ngược.
 - [ ] Mọi nhãn có ký tự đặc biệt đều được bọc trong cặp ngoặc kép `["..."]`.

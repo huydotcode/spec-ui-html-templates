@@ -9,7 +9,7 @@ Kỹ năng này hướng dẫn Agent cách dựng các sơ đồ Mermaid chuyên
 
 ---
 
-## 🎯 Bộ Quy Tắc Cú Pháp An Toàn (Zero-Error Rules)
+## Bộ Quy Tắc Cú Pháp An Toàn (Zero-Error Rules)
 
 ### 1. Tuyệt Đối Không Dùng Mũi Tên Ngược
 
@@ -42,7 +42,7 @@ Thẻ bọc này kích hoạt các tính năng nâng cao của Spec UI:
 
 ---
 
-## 🎨 Mẫu Bảng Màu Spec UI Cho Mermaid (Spec UI Theme Palette)
+## Mẫu Bảng Màu Spec UI Cho Mermaid (Spec UI Theme Palette)
 
 Thêm các định nghĩa `classDef` sau vào cuối sơ đồ để sơ đồ đồng bộ tuyệt đối với bảng màu Terracotta của hệ thống:
 
@@ -57,7 +57,7 @@ flowchart TD
 
 ---
 
-## 📋 Mẫu Sơ Đồ Trình Tự Chuẩn (Standard Sequence Template)
+## Mẫu Sơ Đồ Trình Tự Chuẩn (Standard Sequence Template)
 
 ````html
 <div class="diagram-wrapper">

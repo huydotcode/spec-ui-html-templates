@@ -272,6 +272,12 @@ body::after {
   color: inherit;
 }
 
+.callout .ti {
+  font-size: 1.2em;
+  vertical-align: -0.18em;
+  margin-right: 6px;
+}
+
 .callout.info {
   background: rgba(242, 182, 109, 0.14);
   border-left: 4px solid var(--accent-3);
@@ -657,8 +663,16 @@ body::after {
   transform: translateY(-1px);
 }
 
-.diagram-btn-action svg {
+.diagram-btn-action svg,
+.diagram-btn-action .ti {
   flex-shrink: 0;
+  font-size: 0.95rem;
+}
+
+.diagram-toolbar-title .ti {
+  color: var(--accent-2);
+  font-size: 1.05rem;
+  margin-right: 2px;
 }
 
 .diagram-caption {
@@ -744,8 +758,16 @@ body::after {
   white-space: nowrap;
 }
 
-.diagram-modal-title svg {
+.diagram-modal-title svg,
+.diagram-modal-title .ti {
   color: var(--accent-2);
+  flex-shrink: 0;
+  font-size: 1.25rem;
+}
+
+.diagram-modal-btn svg,
+.diagram-modal-btn .ti {
+  font-size: 1rem;
   flex-shrink: 0;
 }
 
@@ -859,6 +881,13 @@ body::after {
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
+}
+
+.diagram-modal-footer .ti {
+  color: var(--accent);
+  font-size: 1.05rem;
+  margin-right: 5px;
+  vertical-align: -0.15em;
 }
 
 /* 7. Tùy biến plugin Docsify-Tabs */

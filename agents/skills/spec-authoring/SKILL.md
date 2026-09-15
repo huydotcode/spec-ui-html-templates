@@ -9,7 +9,7 @@ Kỹ năng này hướng dẫn Agent cách soạn thảo từng tệp tài liệ
 
 ---
 
-## 🎯 Cấu Trúc 5 Phần Bắt Buộc Của Một Tệp Đặc Tả
+## Cấu Trúc 5 Phần Bắt Buộc Của Một Tệp Đặc Tả
 
 Mỗi tệp tài liệu module `.md` được tạo ra phải bao gồm đầy đủ 5 phần theo thứ tự sau:
 
@@ -90,8 +90,9 @@ Mỗi tệp tài liệu module `.md` được tạo ra phải bao gồm đầy �
 
 ---
 
-## 🚫 Những Điều Cần Tránh Khi Soạn Thảo
+## Những Điều Cần Tránh Khi Soạn Thảo
 
 1. Không dùng inline CSS (`style="..."`).
 2. Không viết nội dung chung chung không có giá trị kỹ thuật.
 3. Không để sót lỗi chưa được giải thích (luôn liệt kê mã lỗi HTTP 400, 401, 403, 404, 429, 500).
+4. **Không dùng emoji trong tiêu đề (H1, H2, H3)**: Giữ typography sạch sẽ, chỉ sử dụng Tabler Icons (`<i class="ti ti-..."></i>`) cho mục đích công năng.

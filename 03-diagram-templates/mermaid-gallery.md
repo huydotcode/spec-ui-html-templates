@@ -5,7 +5,7 @@
 Tất cả các sơ đồ dưới đây đều được tích hợp tự động với:
 
 - **Bộ lọc Auto-Sanitizer**: Khử sạch nút copy-code gây lỗi cú pháp (Syntax error in text).
-- **Thanh công cụ Smart Toolbar**: Nút chuyển đổi 1-click giữa **🔍 Xem kích thước gốc** (cuộn ngang từ lề trái không bị cắt chữ) và **📐 Thu vừa khung**.
+- **Thanh công cụ Smart Toolbar**: Nút chuyển đổi 1-click giữa **Xem kích thước gốc** (cuộn ngang từ lề trái không bị cắt chữ) và **Thu vừa khung**.
 - **Thao tác nhấp đúp (Double-Click)**: Nhấp đúp chuột trực tiếp vào sơ đồ để chuyển đổi nhanh.
 - **Fullscreen Modal chuẩn Figma/Miro**: Cuộn chuột phóng to/thu nhỏ, kéo chuột lia sơ đồ (Pan), phím tắt bàn phím `Esc`, `+`, `-`, `0`.
 
@@ -40,6 +40,7 @@ User --> UC3
 User --> UC4
 Admin --> UC5
 ```
+
 <div class="diagram-caption">Hình 1.1: Sơ đồ Use Case tổng quát phân quyền theo tác nhân</div>
 
 ---
@@ -84,6 +85,7 @@ AuthService --> Redis
 ChatService --> DDB
 MediaService --> S3 & DDB
 ```
+
 <div class="diagram-caption">Hình 1.2: Kiến trúc 3 tầng tổng thể của hệ thống phân tán</div>
 
 ---
@@ -119,6 +121,7 @@ EC2 -->|Lưu trữ / Đọc Session| Cache
 EC2 -->|Ghi nhận Metadata| DDB
 EC2 -->|Upload trực tiếp Media| S3
 ```
+
 <div class="diagram-caption">Hình 1.3: Sơ đồ triển khai hạ tầng vật lý trên Amazon Web Services</div>
 
 ---
@@ -144,6 +147,7 @@ DB-->>MSG: Xác nhận đã ghi thành công (200 OK)
 MSG-->>APP: Phản hồi WebSocket: Ack (msgId, status: SENT)
 APP-->>User: Hiển thị dấu tích đã gửi thành công (✓)
 ```
+
 <div class="diagram-caption">Hình 1.4: Trình tự xử lý gửi tin nhắn thời gian thực qua WebSocket</div>
 
 ---
@@ -169,4 +173,5 @@ ShowError --> InputOTP
 Success --> CreateSession[Khởi tạo phiên làm việc và chuyển hướng]:::step
 CreateSession --> End([Kết thúc quy trình]):::endpoint
 ```
+
 <div class="diagram-caption">Hình 1.5: Sơ đồ luồng hoạt động đăng nhập qua mã xác thực OTP SMS</div>

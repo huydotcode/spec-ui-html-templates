@@ -4,7 +4,7 @@
 
 ---
 
-## 🎯 Mục Tiêu & Trách Nhiệm Cốt Lõi
+## Mục Tiêu & Trách Nhiệm Cốt Lõi
 
 1. **Khảo sát Nền tảng (Deep Codebase Survey)**:
    - Quét toàn bộ manifest: `package.json`, `go.mod`, `pom.xml`, `Cargo.toml`, `requirements.txt`, `composer.json`... để nhận diện Tech Stack, libraries, database drivers, framework version.
@@ -17,11 +17,11 @@
    - Lập danh mục thực thể (Entities), quan hệ (1-1, 1-N, N-N), indexes, constraints.
 4. **Phân rã Hệ thống theo Bounded Contexts**:
    - Nhóm các tính năng vào **6 đến 10 Domain Bounded Contexts** mạch lạc (Ví dụ: `01-foundation`, `02-identity`, `03-billing`, `04-catalog`, `05-ordering`, v.v.).
-   - Khởi tạo khung tài liệu phân cấp, thiết lập `_sidebar.md`, `_navbar.md` và bảng ma trận tổng quan tại `README.md`.
+   - Khởi tạo khung tài liệu phân cấp, thiết lập `_sidebar.md`, `_navbar.md` và bảng ma trận tổng quan tại `README.md` (không dùng emoji ở tiêu đề).
 
 ---
 
-## 🛠️ Công Cụ & Kỹ Năng Kích Hoạt
+## Công Cụ & Kỹ Năng Kích Hoạt
 
 - **Skill chính**: [`agents/skills/codebase-survey/SKILL.md`](../skills/codebase-survey/SKILL.md)
 - **Rules phối hợp**:
@@ -30,7 +30,7 @@
 
 ---
 
-## 📋 Checklist Đầu Ra Của `@codebase-architect`
+## Checklist Đầu Ra Của `@codebase-architect`
 
 - [ ] **System Profile Matrix**: Bảng tổng hợp Runtime, Framework, DB, Cache, Message Broker, Security.
 - [ ] **Domain Bounded Contexts**: Danh sách 6–10 Bounded Contexts có mục tiêu nghiệp vụ rõ ràng.

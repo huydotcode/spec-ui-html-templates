@@ -6,43 +6,49 @@ Tài liệu này tổng hợp toàn bộ các khối giao diện chuyên dụng 
 
 ---
 
-## 📢 1. Hộp Thông Tin Phân Cấp (Callout Boxes)
+## 1. Hộp Thông Tin Phân Cấp (Callout Boxes)
 
-Hộp Callout dùng để làm nổi bật các ghi chú quan trọng, điều kiện rẽ nhánh hoặc cảnh báo bảo mật.
+Hộp Callout dùng để làm nổi bật các ghi chú quan trọng, điều kiện rẽ nhánh hoặc cảnh báo bảo mật. Kết hợp cùng biểu tượng **Tabler Icons** giúp phân loại cảnh báo trực quan và chuyên nghiệp:
 
 ### Cú Pháp & Hiển Thị Mẫu:
 
 ```html
-<div class="callout info"><strong>Thông tin cấu hình:</strong> Cổng API Gateway mặc định lắng nghe tại port 3300.</div>
-
-<div class="callout success">
-  <strong>Tối ưu hóa:</strong> Sử dụng cơ chế In-Memory Cache giúp giảm 85% thời gian phản hồi của truy vấn.
-</div>
-
-<div class="callout warning"><strong>Lưu ý logic ngầm:</strong> Tài khoản sẽ bị tạm khóa 15 phút nếu nhập sai OTP quá 5 lần liên tiếp.</div>
-
-<div class="callout danger"><strong>Nguy cơ bảo mật:</strong> Tuyệt đối không nhúng Secret Key vào mã nguồn frontend client-side.</div>
-```
-
 <div class="callout info">
-  <strong>Thông tin cấu hình:</strong> Cổng API Gateway mặc định lắng nghe tại port 3300.
+  <i class="ti ti-info-circle"></i> <strong>Thông tin cấu hình:</strong> Cổng API Gateway mặc định lắng nghe tại port 3300.
 </div>
 
 <div class="callout success">
-  <strong>Tối ưu hóa:</strong> Sử dụng cơ chế In-Memory Cache giúp giảm 85% thời gian phản hồi của truy vấn.
+  <i class="ti ti-circle-check"></i> <strong>Tối ưu hóa:</strong> Sử dụng cơ chế In-Memory Cache giúp giảm 85% thời gian phản hồi.
 </div>
 
 <div class="callout warning">
-  <strong>Lưu ý logic ngầm:</strong> Tài khoản sẽ bị tạm khóa 15 phút nếu nhập sai OTP quá 5 lần liên tiếp.
+  <i class="ti ti-alert-triangle"></i> <strong>Lưu ý logic ngầm:</strong> Tài khoản sẽ bị tạm khóa 15 phút nếu nhập sai OTP quá 5 lần.
 </div>
 
 <div class="callout danger">
-  <strong>Nguy cơ bảo mật:</strong> Tuyệt đối không nhúng Secret Key vào mã nguồn frontend client-side.
+  <i class="ti ti-alert-circle"></i> <strong>Nguy cơ bảo mật:</strong> Tuyệt đối không nhúng Secret Key vào mã nguồn client-side.
+</div>
+```
+
+<div class="callout info">
+  <i class="ti ti-info-circle"></i> <strong>Thông tin cấu hình:</strong> Cổng API Gateway mặc định lắng nghe tại port 3300.
+</div>
+
+<div class="callout success">
+  <i class="ti ti-circle-check"></i> <strong>Tối ưu hóa:</strong> Sử dụng cơ chế In-Memory Cache giúp giảm 85% thời gian phản hồi của truy vấn.
+</div>
+
+<div class="callout warning">
+  <i class="ti ti-alert-triangle"></i> <strong>Lưu ý logic ngầm:</strong> Tài khoản sẽ bị tạm khóa 15 phút nếu nhập sai OTP quá 5 lần liên tiếp.
+</div>
+
+<div class="callout danger">
+  <i class="ti ti-alert-circle"></i> <strong>Nguy cơ bảo mật:</strong> Tuyệt đối không nhúng Secret Key vào mã nguồn frontend client-side.
 </div>
 
 ---
 
-## 🏷️ 2. HTTP Method Badges
+## 2. HTTP Method Badges
 
 Được sử dụng trong các bảng tài liệu hóa API Endpoints:
 
@@ -64,7 +70,7 @@ Hộp Callout dùng để làm nổi bật các ghi chú quan trọng, điều k
 
 ---
 
-## 🚦 3. Nhãn Trạng Thái Chức Năng (Status Labels)
+## 3. Nhãn Trạng Thái Chức Năng (Status Labels)
 
 Dùng để đánh dấu tình trạng hoàn thiện của module, hoặc đối chiếu trong quá trình chuyển đổi hệ thống:
 
@@ -82,7 +88,7 @@ Dùng để đánh dấu tình trạng hoàn thiện của module, hoặc đối
 
 ---
 
-## 📊 4. Bảng Đặc Tả Kỹ Thuật (Technical Tables)
+## 4. Bảng Đặc Tả Kỹ Thuật (Technical Tables)
 
 Bảng đặc tả tham số I/O hoặc danh sách endpoint có định dạng rõ ràng, tương thích responsive:
 
@@ -95,7 +101,7 @@ Bảng đặc tả tham số I/O hoặc danh sách endpoint có định dạng r
 
 ---
 
-## 📑 5. Khối Chuyển Đổi Tab So Sánh Mã Nguồn (Docsify-Tabs)
+## 5. Khối Chuyển Đổi Tab So Sánh Mã Nguồn (Docsify-Tabs)
 
 Plugin Docsify-Tabs đã được tùy biến giao diện dạng nút tròn (Pill Buttons), đổi màu terracotta ấm khi active và có viền bo gọn gàng:
 
@@ -133,3 +139,26 @@ function getCampaignDetails(campaignId, callback) {
 ```
 
 <!-- tabs:end -->
+
+---
+
+## 6. Biểu Tượng Công Năng (Tabler Icons)
+
+Dự án tích hợp sẵn thư viện **Tabler Icons Webfont**. Bạn có thể chèn icon vào bất kỳ vị trí nào trong tài liệu markdown:
+
+```html
+<i class="ti ti-info-circle"></i>
+<i class="ti ti-circle-check"></i>
+<i class="ti ti-alert-triangle"></i>
+<i class="ti ti-alert-circle"></i>
+<i class="ti ti-arrows-maximize"></i>
+<i class="ti ti-terminal-2"></i>
+```
+
+|                                    Mẫu Hiển Thị                                    | Mã HTML                                | Ứng Dụng Đề Xuất                 |
+| :--------------------------------------------------------------------------------: | :------------------------------------- | :------------------------------- |
+|   <i class="ti ti-info-circle" style="font-size:1.3em;color:var(--accent);"></i>   | `<i class="ti ti-info-circle"></i>`    | Gợi ý cấu hình, ghi chú bổ sung  |
+|  <i class="ti ti-circle-check" style="font-size:1.3em;color:var(--success);"></i>  | `<i class="ti ti-circle-check"></i>`   | Thành công, tối ưu hóa, SLA      |
+| <i class="ti ti-alert-triangle" style="font-size:1.3em;color:var(--warning);"></i> | `<i class="ti ti-alert-triangle"></i>` | Cảnh báo logic ngầm, edge case   |
+|  <i class="ti ti-alert-circle" style="font-size:1.3em;color:var(--danger);"></i>   | `<i class="ti ti-alert-circle"></i>`   | Nguy cơ bảo mật, rủi ro hệ thống |
+|     <i class="ti ti-terminal-2" style="font-size:1.3em;color:var(--ink);"></i>     | `<i class="ti ti-terminal-2"></i>`     | Lệnh dòng lệnh, CLI snippet      |

@@ -4,7 +4,7 @@ Chào mừng bạn đến với **System Spec UI System** — Cổng tài liệu
 
 ---
 
-## 🚀 Tổng Hợp Nâng Cấp Kỹ Thuật Vượt Trội
+## Tổng Hợp Nâng Cấp Kỹ Thuật Vượt Trội
 
 | Tiêu chí                 | Bản Gốc Ban Đầu                                                                        | Bản Đã Nâng Cấp Hoàn Thiện                                                                                                 |
 | :----------------------- | :------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------- |
@@ -15,11 +15,12 @@ Chào mừng bạn đến với **System Spec UI System** — Cổng tài liệu
 | **Hiển thị Khung Sơ Đồ** | Bị lỗi Flexbox căn giữa: lề trái bị đẩy âm (-638px), chữ hai bên bị cắt cụt vĩnh viễn. | **Fit-to-Frame 100%**: Sơ đồ tự co vừa khít khung thẻ Spec UI, không bao giờ bị cắt.                                       |
 | **Xem Chi Tiết Sơ Đồ**   | Không có cách nào phóng to; sơ đồ lớn chữ bị lí tí hoặc bị tràn mất nội dung.          | **Thanh Toolbar Sơ Đồ**: Cho phép chuyển đổi 1-click giữa Vừa khung và Kích thước gốc 1:1. Hỗ trợ nhấp đúp (Double-Click). |
 | **Xem Toàn Màn Hình**    | Không hỗ trợ.                                                                          | **Fullscreen Modal** tương tác cao cấp chuẩn Figma/Miro: cuộn chuột zoom, kéo chuột lia (Pan).                             |
+| **Biểu Tượng Chuẩn Hóa** | Lạm dụng emoji hoạt hình khiến UI mang cảm giác "AI Slop".                             | **Tabler Icons (Webfont CDN)**: Icon nét thanh tinh tế, đồng nhất 24x24, chỉ dùng cho mục đích công năng.                  |
 | **Tương tác Bàn Phím**   | Không có.                                                                              | **Hỗ trợ phím tắt chuyên nghiệp**: `Esc` (Đóng), `+` / `-` (Zoom), `0` (Reset vừa khung).                                  |
 
 ---
 
-## 📂 Danh Mục Tài Liệu Kỹ Thuật
+## Danh Mục Tài Liệu Kỹ Thuật
 
 Tài liệu được phân chia thành các phần chi tiết trong thanh điều hướng bên trái:
 
@@ -31,24 +32,24 @@ Tài liệu được phân chia thành các phần chi tiết trong thanh điề
 
 ---
 
-## 🎨 Trải Nghiệm Nhanh Các Thành Phần Đặc Tả
+## Trải Nghiệm Nhanh Các Thành Phần Đặc Tả
 
 ### 1. Hộp Thông Tin Phân Cấp (Callout Boxes)
 
 <div class="callout info">
-  <strong>Thông tin:</strong> Máy chủ tài liệu chạy độc lập không cần cài đặt thêm thư viện ngoài (Zero-dependency).
+  <i class="ti ti-info-circle"></i> <strong>Thông tin:</strong> Máy chủ tài liệu chạy độc lập không cần cài đặt thêm thư viện ngoài (Zero-dependency).
 </div>
 
 <div class="callout success">
-  <strong>Tối ưu:</strong> 100% sơ đồ Mermaid được tự động khử xung đột và co vừa vặn khung thẻ card.
+  <i class="ti ti-circle-check"></i> <strong>Tối ưu:</strong> 100% sơ đồ Mermaid được tự động khử xung đột và co vừa vặn khung thẻ card.
 </div>
 
 <div class="callout warning">
-  <strong>Lưu ý quan trọng:</strong> Luôn sử dụng thẻ <code>&lt;div class="diagram-wrapper"&gt;</code> bao quanh khối Mermaid để kích hoạt thanh công cụ Toolbar và Fullscreen Modal.
+  <i class="ti ti-alert-triangle"></i> <strong>Lưu ý quan trọng:</strong> Luôn sử dụng thẻ <code>&lt;div class="diagram-wrapper"&gt;</code> bao quanh khối Mermaid để kích hoạt thanh công cụ Toolbar và Fullscreen Modal.
 </div>
 
 <div class="callout danger">
-  <strong>Cảnh báo bảo mật:</strong> Tuyệt đối không lưu trữ khóa bí mật API hoặc chứng chỉ mật khẩu trong kho mã nguồn công khai.
+  <i class="ti ti-alert-circle"></i> <strong>Cảnh báo bảo mật:</strong> Tuyệt đối không lưu trữ khóa bí mật API hoặc chứng chỉ mật khẩu trong kho mã nguồn công khai.
 </div>
 
 ### 2. HTTP Method Badges & Nhãn Trạng Thái
@@ -58,7 +59,7 @@ Tài liệu được phân chia thành các phần chi tiết trong thanh điề
 
 ### 3. Sơ Đồ Tương Tác Trực Quan
 
-Thử nghiệm di chuột lên sơ đồ bên dưới để thấy thanh **Toolbar (🔍 Xem kích thước gốc / ⛶ Toàn màn hình)** hoặc **nhấp đúp chuột** để phóng to:
+Thử nghiệm di chuột lên sơ đồ bên dưới để thấy thanh **Toolbar (Xem kích thước gốc / Toàn màn hình)** hoặc **nhấp đúp chuột** để phóng to:
 
 ```mermaid
 graph TD
@@ -79,7 +80,7 @@ graph TD
 
 ---
 
-## 🛠️ Hướng Dẫn Khởi Chạy Local
+## Hướng Dẫn Khởi Chạy Local
 
 Chạy máy chủ độc lập tích hợp sẵn:
 
@@ -104,7 +105,7 @@ Mở trình duyệt truy cập: **[http://localhost:3300](http://localhost:3300)
 
 ---
 
-## 📋 Áp Dụng Sang Một Dự Án Mới Bất Kỳ (3 Bước)
+## Áp Dụng Sang Dự Án Mới (3 Bước)
 
 1. **Bước 1**: Copy toàn bộ repository này vào thư mục `docs/` của dự án mới của bạn.
 2. **Bước 2**: Mở trợ lý AI (Cursor / Claude / ChatGPT) và dán câu lệnh từ tệp [`AI-SPEC-WRITER-GUIDE.md`](AI-SPEC-WRITER-GUIDE.md):
