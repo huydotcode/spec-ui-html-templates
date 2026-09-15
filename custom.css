@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600&family=Lora:wght@600;700&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap");
 
 /* ===== HỆ THỐNG TOKENS ĐA GIAO DIỆN (Spec UI Multi-Theme System) ===== */
 
@@ -283,7 +283,7 @@ body::after {
 /* Giao diện chính */
 .markdown-section {
   background: transparent !important;
-  padding-top: 60px !important;
+  padding-top: 84px !important;
 }
 
 /* Tiêu đề & Layout Markdown */
@@ -879,11 +879,13 @@ body::after {
 .app-nav {
   position: absolute !important;
   top: 14px !important;
-  right: 210px !important;
+  right: 175px !important;
+  left: auto !important;
   margin: 0 !important;
   color: var(--ink) !important;
   white-space: nowrap !important;
   z-index: 100 !important;
+  transition: right 0.2s ease !important;
 }
 
 .app-nav a {
@@ -1943,6 +1945,25 @@ html[data-theme="solarized-paper"] .mermaid svg .label {
 .theme-switcher-btn .ti {
   font-size: 1.05rem;
   color: var(--accent);
+}
+
+@media (max-width: 1280px) {
+  .theme-switcher-btn {
+    padding: 6px 10px;
+    gap: 4px;
+  }
+  .theme-switcher-btn .theme-name-label {
+    display: none;
+  }
+  .app-nav {
+    right: 76px !important;
+  }
+}
+
+@media (max-width: 1080px) {
+  .app-nav {
+    display: none !important;
+  }
 }
 
 .theme-switcher-dropdown {

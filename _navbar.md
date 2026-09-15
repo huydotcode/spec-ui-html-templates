@@ -1,7 +1,7 @@
 - [Trang chủ](/)
 - [Changelog](CHANGELOG.md)
-- Design Tokens & Components
-  - [Design Tokens](01-design-tokens/colors-and-typography.md)
+- Design Tokens
+  - [Màu sắc & Typography](01-design-tokens/colors-and-typography.md)
   - [UI Components](02-components/ui-components.md)
 - Sơ Đồ Mermaid
   - [Thư Viện Sơ Đồ Mẫu](03-diagram-templates/mermaid-gallery.md)

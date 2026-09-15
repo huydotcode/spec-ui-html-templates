@@ -31,10 +31,13 @@
     <!-- Google Fonts: Be Vietnam Pro (Chuẩn Typography Stripe/Linear) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&display=swap"
+      rel="stylesheet"
+    />
 
     <!-- Style riêng của team (Spec UI System) -->
-    <link rel="stylesheet" href="custom.css" />
+    <link rel="stylesheet" href="custom.css?v=2.5.1" />
 
     <!-- Tabler Icons Webfont CDN -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/dist/tabler-icons.min.css" />
@@ -553,7 +556,7 @@
                     if (container) {
                       const label = container.querySelector(".theme-name-label");
                       if (label) {
-                        label.textContent = themePref === "auto" ? "Hệ thống (" + themeObj.name + ")" : themeObj.name;
+                        label.textContent = themePref === "auto" ? "Tự động" : themeObj.name;
                       }
                       const optionBtns = container.querySelectorAll(".theme-option-btn");
                       optionBtns.forEach((btn) => {
@@ -588,7 +591,7 @@
                     container.innerHTML = `
                       <button type="button" class="theme-switcher-btn" title="Chuyển đổi giao diện (Theme Switcher)">
                         <i class="ti ti-palette"></i>
-                        <span class="theme-name-label">${savedPreference === "auto" ? "Hệ thống (" + activeTheme.name + ")" : activeTheme.name}</span>
+                        <span class="theme-name-label">${savedPreference === "auto" ? "Tự động" : activeTheme.name}</span>
                         <i class="ti ti-chevron-down" style="font-size:0.75rem; opacity:0.7; margin-left: 2px;"></i>
                       </button>
                       <div class="theme-switcher-dropdown">

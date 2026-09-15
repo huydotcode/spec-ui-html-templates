@@ -95,6 +95,9 @@ if (ENABLE_LIVE_RELOAD) {
 
 const server = http.createServer((req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
+  res.setHeader("Cache-Control", "no-store, no-cache, must-revalidate, proxy-revalidate");
+  res.setHeader("Pragma", "no-cache");
+  res.setHeader("Expires", "0");
   let pathname = decodeURIComponent(new URL(req.url, `http://localhost:${PORT}`).pathname);
 
   // Endpoint tiếp nhận kết nối Server-Sent Events (SSE)
