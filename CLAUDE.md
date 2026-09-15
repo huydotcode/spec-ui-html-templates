@@ -8,7 +8,7 @@
 
 ## ⚡ Quick Reference Commands
 
-- **Start Local Documentation Server (Zero Dependencies)**:
+- **Start Local Documentation Server (Zero Dependencies + Live Reload)**:
   ```bash
   node serve.cjs
   # Or with Bun:
@@ -17,6 +17,7 @@
   npm start
   ```
   Runs on `http://localhost:3300` (port can be overridden with `PORT=3301 node serve.cjs`).
+  Live Reload via SSE is enabled by default (disable via `LIVE_RELOAD=false node serve.cjs`).
 - **Syntax Check Server**:
   ```bash
   node -c serve.cjs

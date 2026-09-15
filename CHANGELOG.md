@@ -4,6 +4,17 @@ Tất cả các thay đổi đáng chú ý của dự án **Spec UI System** s�
 
 Định dạng tài liệu tuân thủ theo tiêu chuẩn [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) và tuân theo [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2026-09-15
+
+### ⚡ Zero-Dependency Live Reload Server
+
+#### Đã Thêm Mới (Added)
+- **Tích hợp Live Reload tự động vào `serve.cjs`**:
+  - Hỗ trợ cơ chế Server-Sent Events (SSE) qua endpoint `GET /__livereload`.
+  - Tự động theo dõi tệp bằng `fs.watch` nguyên bản (hỗ trợ debounce 150ms, theo dõi các tệp `.md`, `.css`, `.html`, `.js`, `.json`, `.svg`, `.png`, `.jpg`).
+  - Tự động tiêm script `EventSource` vào `index.html` khi phục vụ cục bộ mà không làm bẩn file tĩnh trên đĩa.
+  - Hỗ trợ tắt bằng biến môi trường `LIVE_RELOAD=false` hoặc `NO_RELOAD=1`.
+
 ---
 
 ## [2.0.0] - 2026-09-15

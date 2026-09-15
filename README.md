@@ -9,6 +9,7 @@ Chào mừng bạn đến với **System Spec UI System** — Cổng tài liệu
 | Tiêu chí                 | Bản Gốc Ban Đầu                                                                        | Bản Đã Nâng Cấp Hoàn Thiện                                                                                                 |
 | :----------------------- | :------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------- |
 | **Khởi chạy Local**      | Dùng `docsify-cli` (thường crash lỗi `Cannot find module 'ansi-colors'`).              | **Zero-Dependency Server** (`serve.cjs` thuần Node.js hoặc `bun`, không cần `node_modules`).                               |
+| **Live Reload Tự Động**  | Phải nhấn F5 / reload thủ công mỗi lần sửa Markdown hoặc CSS.                          | **Zero-Dependency Live Reload**: Tự động reload trình duyệt qua SSE ngay khi lưu file, giữ nguyên hash URL.                |
 | **Vẽ Sơ Đồ Mermaid**     | Lỗi icon quả bom `Syntax error in text` trên hầu hết sơ đồ phức tạp.                   | **100% sơ đồ hiển thị hoàn hảo**, có bộ lọc Auto-Sanitizer khử xung đột plugin.                                            |
 | **Xung đột Plugin Copy** | Plugin Copy-Code chèn chữ "Sao chépLỗiĐã sao chép!" vào mã sơ đồ gây gãy cú pháp.      | **Auto-Sanitizer**: Tự động bóc tách sạch sẽ các button và Prism code trước khi render.                                    |
 | **Hiển thị Khung Sơ Đồ** | Bị lỗi Flexbox căn giữa: lề trái bị đẩy âm (-638px), chữ hai bên bị cắt cụt vĩnh viễn. | **Fit-to-Frame 100%**: Sơ đồ tự co vừa khít khung thẻ Spec UI, không bao giờ bị cắt.                                       |
@@ -73,6 +74,7 @@ graph TD
     classDef service fill:#ecfdf5,stroke:#10b981,stroke-width:1.5px,rx:8px,ry:8px;
     classDef storage fill:#fafaf9,stroke:#78716c,stroke-width:1.5px,rx:6px,ry:6px;
 ```
+
 <div class="diagram-caption">Sơ đồ 1: Luồng kiến trúc điều phối dịch vụ của hệ thống Spec UI</div>
 
 ---
@@ -90,6 +92,15 @@ npm start
 ```
 
 Mở trình duyệt truy cập: **[http://localhost:3300](http://localhost:3300)**
+
+> [!TIP]
+> **Tính năng Live Reload**: Đã được kích hoạt mặc định qua Server-Sent Events (SSE). Mỗi khi bạn lưu file `.md`, `.css` hoặc `.js`, trình duyệt sẽ tự động tải lại mà vẫn giữ nguyên URL hash đang xem. Nếu muốn tắt Live Reload để chạy chế độ tĩnh thuần túy:
+>
+> ```bash
+> $env:LIVE_RELOAD="false"; node serve.cjs
+> # hoặc trên Linux/macOS:
+> LIVE_RELOAD=false node serve.cjs
+> ```
 
 ---
 

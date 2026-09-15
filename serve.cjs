@@ -5,6 +5,7 @@ const path = require("path");
 const PORT = process.env.PORT || 3300;
 // Mặc định phục vụ thư mục chứa tệp này hoặc đường dẫn tùy biến
 const ROOT = path.resolve(process.env.DOCS_ROOT || __dirname);
+const ENABLE_LIVE_RELOAD = process.env.LIVE_RELOAD !== "false" && process.env.NO_RELOAD !== "1";
 
 const MIME_TYPES = {
   ".html": "text/html; charset=UTF-8",
@@ -23,9 +24,95 @@ const MIME_TYPES = {
   ".ttf": "font/ttf",
 };
 
+// --- Cấu hình Live Reload (SSE & File Watcher) ---
+const sseClients = new Set();
+
+const LIVE_RELOAD_SNIPPET = `
+<!-- Live Reload Injected by serve.cjs -->
+<script>
+(function() {
+  if (!window.EventSource) return;
+  var es = new EventSource('/__livereload');
+  es.onmessage = function(e) {
+    if (e.data === 'reload') {
+      console.log('[Spec UI] Phát hiện thay đổi tệp, đang tự động tải lại...');
+      location.reload();
+    }
+  };
+})();
+</script>
+`;
+
+if (ENABLE_LIVE_RELOAD) {
+  // Gửi heartbeat ping mỗi 30 giây để giữ kết nối SSE
+  setInterval(() => {
+    for (const client of sseClients) {
+      client.write(": ping\n\n");
+    }
+  }, 30000).unref();
+
+  const WATCH_EXTS = new Set([".md", ".css", ".html", ".js", ".json", ".svg", ".png", ".jpg", ".jpeg"]);
+
+  let debounceTimer = null;
+  function broadcastReload() {
+    clearTimeout(debounceTimer);
+    debounceTimer = setTimeout(() => {
+      for (const client of sseClients) {
+        client.write("data: reload\n\n");
+      }
+    }, 150);
+  }
+
+  try {
+    fs.watch(ROOT, { recursive: true }, (eventType, filename) => {
+      if (!filename) return;
+      const normalized = filename.replace(/\\/g, "/");
+      // Bỏ qua thư mục hệ thống, git, node_modules, codegraph và tệp ẩn/backup
+      if (
+        normalized.includes(".git/") ||
+        normalized.includes(".codegraph/") ||
+        normalized.includes("node_modules/") ||
+        normalized.startsWith(".git") ||
+        normalized.startsWith(".codegraph") ||
+        normalized.startsWith("node_modules") ||
+        normalized.includes("/.") ||
+        normalized.startsWith(".") ||
+        normalized.endsWith("~") ||
+        normalized.endsWith(".tmp") ||
+        normalized.endsWith(".swp")
+      ) {
+        return;
+      }
+      const ext = path.extname(filename).toLowerCase();
+      if (WATCH_EXTS.has(ext)) {
+        broadcastReload();
+      }
+    });
+  } catch (err) {
+    console.warn("⚠️ Cảnh báo: Không thể khởi tạo File Watcher tự động:", err.message);
+  }
+}
+
 const server = http.createServer((req, res) => {
   res.setHeader("Access-Control-Allow-Origin", "*");
   let pathname = decodeURIComponent(new URL(req.url, `http://localhost:${PORT}`).pathname);
+
+  // Endpoint tiếp nhận kết nối Server-Sent Events (SSE)
+  if (ENABLE_LIVE_RELOAD && pathname === "/__livereload") {
+    res.writeHead(200, {
+      "Content-Type": "text/event-stream; charset=UTF-8",
+      "Cache-Control": "no-cache, no-transform",
+      Connection: "keep-alive",
+      "Access-Control-Allow-Origin": "*",
+    });
+    res.write(": connected\n\n");
+    sseClients.add(res);
+    req.on("close", () => {
+      sseClients.delete(res);
+    });
+    return;
+  }
+
   if (pathname === "/") pathname = "/index.html";
   const filePath = path.normalize(path.join(ROOT, pathname));
 
@@ -40,7 +127,29 @@ const server = http.createServer((req, res) => {
       res.writeHead(404, { "Content-Type": "text/plain; charset=UTF-8" });
       return res.end("404 Not Found");
     }
+
     const ext = path.extname(filePath).toLowerCase();
+
+    // Tiêm động đoạn script Live Reload khi phục vụ trang index.html
+    if (ENABLE_LIVE_RELOAD && pathname === "/index.html") {
+      fs.readFile(filePath, "utf8", (readErr, content) => {
+        if (readErr) {
+          res.writeHead(500, { "Content-Type": "text/plain; charset=UTF-8" });
+          return res.end("500 Internal Server Error");
+        }
+        const injected = content.includes("</body>")
+          ? content.replace("</body>", `${LIVE_RELOAD_SNIPPET}\n</body>`)
+          : content + LIVE_RELOAD_SNIPPET;
+        const buffer = Buffer.from(injected, "utf8");
+        res.writeHead(200, {
+          "Content-Type": "text/html; charset=UTF-8",
+          "Content-Length": buffer.length,
+        });
+        res.end(buffer);
+      });
+      return;
+    }
+
     res.writeHead(200, { "Content-Type": MIME_TYPES[ext] || "application/octet-stream" });
     fs.createReadStream(filePath).pipe(res);
   });
@@ -48,4 +157,7 @@ const server = http.createServer((req, res) => {
 
 server.listen(PORT, () => {
   console.log(`🚀 Tài liệu đang chạy tại: http://localhost:${PORT}`);
+  if (ENABLE_LIVE_RELOAD) {
+    console.log(`🔄 Tính năng Live Reload: ĐANG BẬT (Tự động tải lại khi sửa file)`);
+  }
 });
