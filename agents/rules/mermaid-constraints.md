@@ -41,18 +41,16 @@
 
 ---
 
-## 🖼️ 4. Thẻ Bọc Khung Bắt Buộc (Wrapper Element)
+## 🖼️ 4. Định Dạng Khối Sơ Đồ & Khả Năng Tương Thích Kép (GitHub & Docsify)
 
-- Mọi sơ đồ Mermaid đều phải được bọc trong `<div class="diagram-wrapper">`:
-
-  ````html
-  <div class="diagram-wrapper">```mermaid flowchart LR A["Client"] --> B["API Gateway"]</div>
-  ````
-
-  </div>
+- **Khuyến nghị chuẩn**: Luôn viết sơ đồ bằng khối mã Markdown tiêu chuẩn:
+  ````markdown
+  ```mermaid
+  flowchart LR
+      A["Client"] --> B["API Gateway"]
   ```
-
-- Thẻ wrapper này đảm bảo:
-  1. Tự động tương thích với bộ lọc Auto-Sanitizer (khử xung đột với PrismJS và plugin Copy-Code).
-  2. Kích hoạt tính năng thu phóng thông minh (Zoom / Pan / Fit-to-Frame).
-  3. Kích hoạt nút phóng to toàn màn hình (Modal Figma/Miro).
+  ````
+- **Cơ chế tương thích kép**:
+  1. **Trên GitHub / Git Portal**: GitHub tự động nhận diện ```` ```mermaid ```` và vẽ thành sơ đồ SVG trực quan ngay trên giao diện web của repository mà không bị biến thành đoạn code thô.
+  2. **Trên Docsify Portal**: Trình biên dịch Markdown trong `index.html` đã được lập trình sẵn để tự động bọc mọi khối `mermaid` vào thẻ `<div class="diagram-wrapper"><pre class="mermaid">`, tự động kích hoạt bộ lọc Auto-Sanitizer, Smart Toolbar (Zoom 1:1, Double-Click) và Fullscreen Modal chuẩn Figma/Miro.
+- *Lưu ý*: Tránh tự viết thẻ HTML thuần `<pre class="mermaid">` trực tiếp trong file Markdown vì GitHub sẽ coi đó là văn bản thô (preformatted text) và không thể render được sơ đồ trên web GitHub.

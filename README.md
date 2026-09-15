@@ -59,8 +59,7 @@ Tài liệu được phân chia thành các phần chi tiết trong thanh điề
 
 Thử nghiệm di chuột lên sơ đồ bên dưới để thấy thanh **Toolbar (🔍 Xem kích thước gốc / ⛶ Toàn màn hình)** hoặc **nhấp đúp chuột** để phóng to:
 
-<div class="diagram-wrapper">
-  <pre class="mermaid">
+```mermaid
 graph TD
     User([Người dùng / Client]):::client -->|Yêu cầu HTTPS| CDN[Cloud CDN / Reverse Proxy]:::gateway
     CDN --> APIGW[API Gateway - Port 3300]:::gateway
@@ -73,10 +72,8 @@ graph TD
     classDef gateway fill:#fef3c7,stroke:#d97706,stroke-width:1.5px,rx:8px,ry:8px;
     classDef service fill:#ecfdf5,stroke:#10b981,stroke-width:1.5px,rx:8px,ry:8px;
     classDef storage fill:#fafaf9,stroke:#78716c,stroke-width:1.5px,rx:6px,ry:6px;
-
-  </pre>
-  <div class="diagram-caption">Sơ đồ 1: Luồng kiến trúc điều phối dịch vụ của hệ thống Spec UI</div>
-</div>
+```
+<div class="diagram-caption">Sơ đồ 1: Luồng kiến trúc điều phối dịch vụ của hệ thống Spec UI</div>
 
 ---
 

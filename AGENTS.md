@@ -81,7 +81,7 @@ Agent **TUYỆT ĐỐI KHÔNG** được vi phạm các quy tắc sau:
 1. **Không sử dụng Inline Style (`style=""`)**: Chỉ sử dụng class CSS Spec UI đã định nghĩa sẵn. Không tự ý nhồi inline CSS làm phá vỡ tính đồng bộ của Design Tokens.
 2. **Không dùng mũi tên ngược trong Mermaid**: Nghiêm cấm dùng `<-` hoặc `<--` trong flowchart vì sẽ gây lỗi Syntax Error. Luôn dùng mũi tên xuôi `-->` và đảo chiều nút nguồn / đích.
 3. **Nhãn Mermaid có ký tự đặc biệt phải đặt trong nháy kép**: Mọi nhãn chứa dấu `/`, `:`, `()`, `""` phải viết dưới dạng `Node["Nội dung (Chi tiết / Lưu ý)"]`.
-4. **Luôn bọc sơ đồ trong `<div class="diagram-wrapper">`**: Để sơ đồ được tự động kích hoạt tính năng co vừa khung, Smart Toolbar và Fullscreen Modal Figma/Miro.
+4. **Luôn dùng khối mã Markdown chuẩn ` ```mermaid `**: Trình biên dịch của Docsify đã tự động bọc thẻ `<div class="diagram-wrapper">`, đồng thời đảm bảo sơ đồ hiển thị chuẩn xác trên cả giao diện web của GitHub (không dùng thẻ HTML thuần `<pre class="mermaid">` vì sẽ bị GitHub coi là code thô).
 5. **Không viết mô tả hời hợt**: Tuyệt đối không chỉ liệt kê lại code hoặc viết lý thuyết chung chung. Phải bóc tách được:
    - Tham số I/O thực tế.
    - Cơ chế bảo mật ngầm (Token, Hashing, Encryption).
