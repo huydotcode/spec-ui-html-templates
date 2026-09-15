@@ -32,12 +32,13 @@ html[data-theme="warm-terracotta"] {
   --theme-color: var(--accent-2);
   --base-background: var(--bg);
   --base-color: var(--ink);
-  --base-font-family: "Be Vietnam Pro", "Segoe UI", sans-serif;
+  --base-font-family: "Be Vietnam Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --base-font-size: 15px;
   --base-line-height: 1.7;
-  --heading-font-family: "Lora", "Georgia", serif;
+  --heading-font-family: "Be Vietnam Pro", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   --heading-color: var(--ink);
   --heading-font-weight: 700;
+  --heading-letter-spacing: -0.025em;
   --content-max-width: 960px;
 
   --sidebar-background: var(--surface);
@@ -282,22 +283,47 @@ body::after {
 /* Giao diện chính */
 .markdown-section {
   background: transparent !important;
-  padding-top: var(--space-5) !important;
+  padding-top: 60px !important;
 }
 
 /* Tiêu đề & Layout Markdown */
 .markdown-section h1,
 .markdown-section h2 {
+  font-family: var(--heading-font-family) !important;
+  letter-spacing: var(--heading-letter-spacing) !important;
   border-bottom: 2px solid var(--accent-2);
   padding-bottom: 8px;
   margin-top: var(--space-5) !important;
   margin-bottom: var(--space-3) !important;
 }
 
+.markdown-section h1 {
+  font-weight: 700 !important;
+  font-size: 2.1rem !important;
+  line-height: 1.3 !important;
+}
+
+.markdown-section h2 {
+  font-weight: 600 !important;
+  font-size: 1.5rem !important;
+}
+
 .markdown-section h3 {
+  font-family: var(--heading-font-family) !important;
+  letter-spacing: var(--heading-letter-spacing) !important;
+  font-weight: 600 !important;
+  font-size: 1.25rem !important;
   margin-top: var(--space-4) !important;
   margin-bottom: var(--space-2) !important;
   color: var(--accent-2);
+}
+
+.markdown-section h4,
+.markdown-section h5,
+.markdown-section h6 {
+  font-family: var(--heading-font-family) !important;
+  letter-spacing: var(--heading-letter-spacing) !important;
+  font-weight: 600 !important;
 }
 
 .markdown-section ul,
@@ -333,7 +359,8 @@ body::after {
 
 /* 1. App name (Tiêu đề App ở Sidebar) */
 .sidebar .app-name {
-  font-family: "Lora", serif !important;
+  font-family: var(--heading-font-family) !important;
+  letter-spacing: -0.02em !important;
   font-size: 1.25rem !important;
   font-weight: 700 !important;
   color: var(--accent-2) !important;
@@ -850,8 +877,13 @@ body::after {
 
 /* 5.2. Top Navigation Bar & Dropdowns (App Nav) */
 .app-nav {
-  margin: 18px 210px 0 0 !important;
+  position: absolute !important;
+  top: 14px !important;
+  right: 210px !important;
+  margin: 0 !important;
   color: var(--ink) !important;
+  white-space: nowrap !important;
+  z-index: 100 !important;
 }
 
 .app-nav a {
@@ -869,7 +901,7 @@ body::after {
 }
 
 .app-nav li {
-  margin: 0 10px !important;
+  margin: 0 8px !important;
 }
 
 .app-nav li ul {
@@ -1205,7 +1237,8 @@ svg.diagram-has-focus .messageText.message-focused {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-family: "Lora", serif;
+  font-family: var(--heading-font-family);
+  letter-spacing: -0.02em;
   font-weight: 700;
   font-size: 1.05rem;
   color: var(--ink);
@@ -1454,7 +1487,9 @@ svg.diagram-has-focus .messageText.message-focused {
 }
 
 .pagination-item-title {
-  font-family: "Lora", serif !important;
+  font-family: var(--heading-font-family) !important;
+  letter-spacing: -0.02em !important;
+  font-weight: 600 !important;
   font-size: 1.15rem !important;
   color: var(--ink) !important;
   margin-top: 4px !important;

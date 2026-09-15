@@ -4,6 +4,23 @@ Tất cả các thay đổi đáng chú ý của dự án **Spec UI System** s�
 
 Định dạng tài liệu tuân thủ theo tiêu chuẩn [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) và tuân theo [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.5.0] - 2026-09-15
+
+### Clean Typography Unification & Navbar Layout (Chuẩn Hóa Typography & Bố Cục Header)
+
+#### Đã Thêm Mới & Cải Tiến (Added & Improved)
+
+- **Chuẩn Hóa Typography Toàn Diện (Stripe / Linear Clean Sans-Serif Standard)**:
+  - Tích hợp chính thức Google Fonts `Be Vietnam Pro` (weights: 400, 500, 600, 700) trực tiếp trong `index.html`.
+  - Thay thế toàn bộ font Serif cũ (`Lora`, `Georgia`) ở tiêu đề `h1`–`h6`, tên ứng dụng Sidebar, tiêu đề Diagram Modal và thanh điều hướng phân trang bằng `Be Vietnam Pro` Sans-Serif sắc sảo (`font-weight: 700 / 600`), kết hợp `letter-spacing: -0.025em`.
+  - Loại bỏ triệt để hiện tượng lệch pha kiểu chữ (font mismatch) giữa thanh điều hướng phía trên (Sans-Serif) và tiêu đề H1 (Serif fallback về Times New Roman / Georgia).
+- **Khắc Phục Hoàn Toàn Lỗi Chồng Đè Navbar & H1 (Header Spacing Fix)**:
+  - Tăng khoảng đệm đỉnh của `.markdown-section` lên `60px !important`, tạo không gian thông thoáng, chuẩn tỷ lệ vàng giữa thanh menu và tiêu đề bài viết.
+  - Tinh chỉnh `.app-nav` với vị trí tuyệt đối `position: absolute; top: 14px; right: 210px; margin: 0; white-space: nowrap;`, triệt tiêu hoàn toàn nguy cơ rớt dòng hoặc đè sát chữ vào H1.
+  - Tối ưu hóa trên cả 5 bộ giao diện (Light Warm Terracotta, Obsidian Dark, Nordic Slate, Forest Sage, Solarized Paper).
+
+---
+
 ## [2.4.0] - 2026-09-15
 
 ### Multi-Theme Engine & Obsidian Dark Mode (Kiến Trúc Đa Giao Diện & Chế Độ Tối)

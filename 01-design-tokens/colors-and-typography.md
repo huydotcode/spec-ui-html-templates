@@ -29,19 +29,19 @@ Hệ thống sử dụng gam màu kem ấm (_Warm Cream & Terracotta_) sang tr�
 
 ## 2. Hệ Thống Kiểu Chữ (Typography Tokens)
 
-Hệ thống kết hợp tinh tế giữa 3 họ font chữ phục vụ cho từng mục đích cụ thể:
+Hệ thống chuẩn hóa hoàn toàn theo triết lý hiện đại, dứt khoát ("Clean Modern Typography" — chuẩn Stripe / Linear) tối ưu cho cổng tài liệu kỹ thuật:
 
-### 1. Tiêu Đề Chính (Headings — Lora)
+### 1. Tiêu Đề & Tiêu Điểm (Headings — Be Vietnam Pro Bold)
 
-- **Font Family**: `'Lora', 'Georgia', serif`
-- **Đặc trưng**: Font chữ có chân mang nét cổ điển, sang trọng, tạo điểm nhấn cấu trúc bài viết vững chãi.
-- **Ứng dụng**: Các thẻ `<h1>`, `<h2>`, `<h3>` và tiêu đề Sidebar.
+- **Font Family**: `'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif`
+- **Đặc trưng**: Font chữ Sans-Serif hình học hiện đại, sử dụng trọng lượng đậm (`font-weight: 600 - 700`) kết hợp độ thu hẹp khoảng cách ký tự nhẹ (`letter-spacing: -0.025em`) tạo phong thái kỹ thuật sắc sảo, dứt khoát, loại bỏ hoàn toàn sự lệch pha (mismatch) giữa thanh điều hướng và tiêu đề.
+- **Ứng dụng**: Các thẻ `<h1>`, `<h2>`, `<h3>`, `<h4>`, tên ứng dụng Sidebar và tiêu đề Modal.
 
-### 2. Văn Bản Nội Dung (Body Text — Be Vietnam Pro)
+### 2. Văn Bản Nội Dung (Body Text — Be Vietnam Pro Regular/Medium)
 
-- **Font Family**: `'Be Vietnam Pro', 'Segoe UI', sans-serif`
-- **Đặc trưng**: Được thiết kế tối ưu hóa hoàn hảo cho hiển thị tiếng Việt, các dấu thanh không bị dính vào chữ hoa hay chữ thường, đọc thoải mái trên mọi độ phân giải màn hình.
-- **Ứng dụng**: Các đoạn văn `<p>`, danh sách `<ul>`, bảng biểu `<table>`.
+- **Font Family**: `'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif`
+- **Đặc trưng**: Được nhúng trực tiếp qua Google Fonts, tối ưu hóa tuyệt đối cho hiển thị tiếng Việt với các ký tự dấu thanh rõ ràng, không bị dính nét, đọc êm mắt trên mọi độ phân giải màn hình từ mobile đến 4K.
+- **Ứng dụng**: Các đoạn văn `<p>`, danh sách `<ul>`, bảng biểu `<table>`, thanh điều hướng `_navbar` và danh mục `_sidebar`.
 
 ### 3. Mã Nguồn & Dữ Liệu (Code & Monospace)
 
