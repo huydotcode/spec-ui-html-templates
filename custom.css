@@ -300,6 +300,18 @@ body::after {
   color: var(--accent-2);
 }
 
+.markdown-section ul,
+.markdown-section ol {
+  padding-left: 24px;
+  margin: 14px 0 18px;
+}
+
+.markdown-section ul > li,
+.markdown-section ol > li {
+  margin: 8px 0;
+  line-height: 1.75;
+}
+
 .markdown-section a:not(.anchor) {
   color: var(--accent-2);
   font-weight: 500;
@@ -575,6 +587,7 @@ body::after {
 /* 2. HTTP Badges */
 .badge {
   display: inline-block;
+  vertical-align: middle;
   padding: 4px 10px;
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-weight: 700;
@@ -583,7 +596,7 @@ body::after {
   border-radius: 6px;
   letter-spacing: 0.05em;
   line-height: 1.2;
-  margin-right: 6px;
+  margin: 3px 6px 3px 0;
 }
 
 .badge.get {
@@ -616,12 +629,14 @@ body::after {
 .status-label {
   display: inline-flex;
   align-items: center;
+  vertical-align: middle;
   gap: 6px;
   font-size: 0.8rem;
   font-weight: 600;
   padding: 4px 10px;
   border-radius: 999px;
   border: 1px solid transparent;
+  margin: 3px 6px 3px 0;
 }
 
 .status-label::before {
