@@ -2,12 +2,13 @@
 
 <span class="status-label stable">Mermaid Engine v10 (Fit-to-Frame 100%)</span>
 
-Tất cả các sơ đồ dưới đây đều được tích hợp tự động với:
+Tất cả các sơ đồ dưới đây đều được tích hợp tự động với bộ tính năng **Mermaid Pro Interactive Suite**:
 
-- **Bộ lọc Auto-Sanitizer**: Khử sạch nút copy-code gây lỗi cú pháp (Syntax error in text).
-- **Thanh công cụ Smart Toolbar**: Nút chuyển đổi 1-click giữa **Xem kích thước gốc** (cuộn ngang từ lề trái không bị cắt chữ) và **Thu vừa khung**.
-- **Thao tác nhấp đúp (Double-Click)**: Nhấp đúp chuột trực tiếp vào sơ đồ để chuyển đổi nhanh.
-- **Fullscreen Modal chuẩn Figma/Miro**: Cuộn chuột phóng to/thu nhỏ, kéo chuột lia sơ đồ (Pan), phím tắt bàn phím `Esc`, `+`, `-`, `0`.
+- **Interactive Node Focus & Path Highlight**: Click vào bất kỳ node nào để làm sáng rõ nút đó cùng luồng kết nối và các nút láng giềng liên quan; các thành phần ngoại lai tự động mờ nhẹ.
+- **Xuất ảnh Vector & Raster**: Tải trực tiếp file `.svg` sắc nét hoặc ảnh `.png` chất lượng cao 2x Retina có sẵn nền sáng chuẩn.
+- **Sao chép mã nguồn 1-click**: Nút "Sao chép mã" trực tiếp trên toolbar giúp lấy nhanh cú pháp Mermaid gốc.
+- **Thanh công cụ Smart Toolbar**: Nút chuyển đổi 1-click giữa **Xem 1:1** và **Thu vừa khung**, kết hợp **Thao tác nhấp đúp (Double-Click)**.
+- **Fullscreen Modal chuẩn Figma/Miro**: Phóng to/thu nhỏ bằng cuộn chuột, lia sơ đồ (Pan), thanh chọn tỉ lệ nhanh **Preset Zoom** (`Fit`, `50%`, `100%`, `150%`, `200%`), chế độ **Toàn màn hình Native (F11)**, phím tắt `Esc`, `+`, `-`, `0`, `1`, `2`, `5`, `F`.
 
 ---
 

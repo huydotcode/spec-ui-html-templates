@@ -6,17 +6,21 @@ Chào mừng bạn đến với **System Spec UI System** — Cổng tài liệu
 
 ## Tổng Hợp Nâng Cấp Kỹ Thuật Vượt Trội
 
-| Tiêu chí                 | Bản Gốc Ban Đầu                                                                        | Bản Đã Nâng Cấp Hoàn Thiện                                                                                                 |
-| :----------------------- | :------------------------------------------------------------------------------------- | :------------------------------------------------------------------------------------------------------------------------- |
-| **Khởi chạy Local**      | Dùng `docsify-cli` (thường crash lỗi `Cannot find module 'ansi-colors'`).              | **Zero-Dependency Server** (`serve.cjs` thuần Node.js hoặc `bun`, không cần `node_modules`).                               |
-| **Live Reload Tự Động**  | Phải nhấn F5 / reload thủ công mỗi lần sửa Markdown hoặc CSS.                          | **Zero-Dependency Live Reload**: Tự động reload trình duyệt qua SSE ngay khi lưu file, giữ nguyên hash URL.                |
-| **Vẽ Sơ Đồ Mermaid**     | Lỗi icon quả bom `Syntax error in text` trên hầu hết sơ đồ phức tạp.                   | **100% sơ đồ hiển thị hoàn hảo**, có bộ lọc Auto-Sanitizer khử xung đột plugin.                                            |
-| **Xung đột Plugin Copy** | Plugin Copy-Code chèn chữ "Sao chépLỗiĐã sao chép!" vào mã sơ đồ gây gãy cú pháp.      | **Auto-Sanitizer**: Tự động bóc tách sạch sẽ các button và Prism code trước khi render.                                    |
-| **Hiển thị Khung Sơ Đồ** | Bị lỗi Flexbox căn giữa: lề trái bị đẩy âm (-638px), chữ hai bên bị cắt cụt vĩnh viễn. | **Fit-to-Frame 100%**: Sơ đồ tự co vừa khít khung thẻ Spec UI, không bao giờ bị cắt.                                       |
-| **Xem Chi Tiết Sơ Đồ**   | Không có cách nào phóng to; sơ đồ lớn chữ bị lí tí hoặc bị tràn mất nội dung.          | **Thanh Toolbar Sơ Đồ**: Cho phép chuyển đổi 1-click giữa Vừa khung và Kích thước gốc 1:1. Hỗ trợ nhấp đúp (Double-Click). |
-| **Xem Toàn Màn Hình**    | Không hỗ trợ.                                                                          | **Fullscreen Modal** tương tác cao cấp chuẩn Figma/Miro: cuộn chuột zoom, kéo chuột lia (Pan).                             |
-| **Biểu Tượng Chuẩn Hóa** | Lạm dụng emoji hoạt hình khiến UI mang cảm giác "AI Slop".                             | **Tabler Icons (Webfont CDN)**: Icon nét thanh tinh tế, đồng nhất 24x24, chỉ dùng cho mục đích công năng.                  |
-| **Tương tác Bàn Phím**   | Không có.                                                                              | **Hỗ trợ phím tắt chuyên nghiệp**: `Esc` (Đóng), `+` / `-` (Zoom), `0` (Reset vừa khung).                                  |
+| Tiêu chí                      | Bản Gốc Ban Đầu                                                                        | Bản Đã Nâng Cấp Hoàn Thiện                                                                                                    |
+| :---------------------------- | :------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------- |
+| **Khởi chạy Local**           | Dùng `docsify-cli` (thường crash lỗi `Cannot find module 'ansi-colors'`).              | **Zero-Dependency Server** (`serve.cjs` thuần Node.js hoặc `bun`, không cần `node_modules`).                                  |
+| **Live Reload Tự Động**       | Phải nhấn F5 / reload thủ công mỗi lần sửa Markdown hoặc CSS.                          | **Zero-Dependency Live Reload**: Tự động reload trình duyệt qua SSE ngay khi lưu file, giữ nguyên hash URL.                   |
+| **Vẽ Sơ Đồ Mermaid**          | Lỗi icon quả bom `Syntax error in text` trên hầu hết sơ đồ phức tạp.                   | **100% sơ đồ hiển thị hoàn hảo**, có bộ lọc Auto-Sanitizer khử xung đột plugin.                                               |
+| **Xung đột Plugin Copy**      | Plugin Copy-Code chèn chữ "Sao chépLỗiĐã sao chép!" vào mã sơ đồ gây gãy cú pháp.      | **Auto-Sanitizer**: Tự động bóc tách sạch sẽ các button và Prism code trước khi render.                                       |
+| **Hiển thị Khung Sơ Đồ**      | Bị lỗi Flexbox căn giữa: lề trái bị đẩy âm (-638px), chữ hai bên bị cắt cụt vĩnh viễn. | **Fit-to-Frame 100%**: Sơ đồ tự co vừa khít khung thẻ Spec UI, không bao giờ bị cắt.                                          |
+| **Tập Trung Luồng Focus**     | Khó theo dõi mạch logic trong sơ đồ phức tạp nhiều nút liên kết chéo.                  | **Interactive Node Focus**: Click vào node để làm sáng rõ luồng và nút láng giềng; tự động làm mờ thành phần không liên quan. |
+| **Xuất & Tải Ảnh Sơ Đồ**      | Phải chụp ảnh màn hình thủ công, ảnh mờ vỡ nét và bị nền đen khi dán vào slide/docs.   | **Export Vector SVG & PNG 2x High-Res**: Tải 1-click trực tiếp file SVG/PNG có nền sáng chuẩn Retina.                         |
+| **Sao Chép Mã Mermaid**       | Không có nút copy riêng cho sơ đồ (bị lẫn với code block).                             | **1-Click Copy Mermaid Code**: Nút sao chép mã nguồn trực tiếp trên toolbar có phản hồi tức thì.                              |
+| **Xem Chi Tiết Sơ Đồ**        | Không có cách nào phóng to; sơ đồ lớn chữ bị lí tí hoặc bị tràn mất nội dung.          | **Thanh Toolbar Sơ Đồ**: Cho phép chuyển đổi 1-click giữa Vừa khung và Kích thước gốc 1:1. Hỗ trợ nhấp đúp (Double-Click).    |
+| **Xem Toàn Màn Hình**         | Không hỗ trợ.                                                                          | **Fullscreen Modal chuẩn Figma/Miro**: Cuộn chuột zoom, kéo chuột lia (Pan), Preset Zoom (`Fit`, `50%`, `100%`, `200%`).      |
+| **Toàn Màn Hình Trình Duyệt** | Không có.                                                                              | **Native Fullscreen (F11 API)**: Mở rộng tràn viền toàn bộ màn hình trình duyệt.                                              |
+| **Biểu Tượng Chuẩn Hóa**      | Lạm dụng emoji hoạt hình khiến UI mang cảm giác "AI Slop".                             | **Tabler Icons (Webfont CDN)**: Icon nét thanh tinh tế, đồng nhất 24x24, chỉ dùng cho mục đích công năng.                     |
+| **Tương tác Bàn Phím**        | Không có.                                                                              | **Hỗ trợ phím tắt chuyên nghiệp**: `Esc` (Đóng), `+` / `-` (Zoom), `0` (Reset), `1`/`2`/`5` (Preset), `F` (Fullscreen).       |
 
 ---
 

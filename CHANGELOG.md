@@ -4,6 +4,31 @@ Tất cả các thay đổi đáng chú ý của dự án **Spec UI System** s�
 
 Định dạng tài liệu tuân thủ theo tiêu chuẩn [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) và tuân theo [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.3.0] - 2026-09-15
+
+### Mermaid Pro Interactive Suite (Bộ Tương Tác Sơ Đồ Chuyên Sâu)
+
+#### Đã Thêm Mới (Added)
+
+- **Xuất ảnh Sơ đồ Vector & Raster (Export SVG & High-Res PNG 2x)**:
+  - Tích hợp nút xuất trực tiếp file vector `.svg` sắc nét và ảnh raster `.png` (độ phân giải cao 2x Retina, tự động lót nền sáng `#fffdf9` chống đen nền khi dán vào slide/tài liệu).
+  - Khả dụng trên cả thanh công cụ Smart Toolbar và tiêu đề Fullscreen Modal.
+- **Sao chép mã nguồn Mermaid 1-Click (Copy Code)**:
+  - Bổ sung nút "Sao chép mã" trên Diagram Toolbar giúp lập trình viên copy tức thì cú pháp Mermaid gốc để paste vào GitHub Issues, Notion hoặc trình soạn thảo khác.
+  - Phản hồi trực quan tức thì với hiệu ứng đổi sang icon check và nhãn "Đã sao chép!" trong 2 giây.
+- **Interactive Node Focus & Path Highlighting (Tập trung luồng)**:
+  - Khi click vào bất kỳ nút nào trong sơ đồ (Flowchart, Sequence, Architecture), hệ thống tự động làm sáng rõ nút đó cùng toàn bộ các luồng (edges) và nút láng giềng kết nối trực tiếp.
+  - Tự động làm mờ nhẹ (dimming opacity 0.16) tất cả các thành phần ngoại lai không liên quan, giúp kỹ sư phân tích luồng logic phức tạp mà không bị rối mắt.
+  - Click lại vào node hoặc click ra vùng nền trống để hủy chế độ focus.
+  - Hoạt động mượt mà trên cả sơ đồ nhúng trong bài viết lẫn sơ đồ trong Fullscreen Modal.
+- **Bộ Điều Khiển Phóng To Đa Mức (Multi-Level Zoom Presets)**:
+  - Bổ sung thanh chọn tỉ lệ nhanh dạng segmented pill trong Modal: `Fit` (Vừa khung), `50%`, `100%`, `150%`, `200%`.
+  - Bổ sung phím tắt bàn phím tiện dụng trong Modal: `1` (100%), `2` (200%), `5` (50%), `0` (Reset vừa khung), `F` (Toàn màn hình).
+- **Toàn Màn Hình Trình Duyệt Native (F11 Fullscreen API)**:
+  - Bổ sung nút chuyển đổi Native Fullscreen thật sự (F11) ngay trong Modal, mang lại trải nghiệm xem sơ đồ toàn cảnh chuẩn Figma và Miro.
+
+---
+
 ## [2.2.0] - 2026-09-15
 
 ### Chuẩn Hóa Tabler Icons & Thiết Kế "Non-AI" (Clean Typography)

@@ -616,10 +616,11 @@ body::after {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
   margin-bottom: 14px;
   padding-bottom: 10px;
   border-bottom: 1px dashed var(--line);
+  flex-wrap: wrap;
 }
 
 .diagram-toolbar-title {
@@ -633,10 +634,31 @@ body::after {
   gap: 6px;
 }
 
+.diagram-toolbar-hint {
+  font-size: 0.72rem;
+  font-weight: 500;
+  color: var(--muted);
+  background: rgba(122, 106, 97, 0.1);
+  padding: 2px 8px;
+  border-radius: 99px;
+  margin-left: 6px;
+  text-transform: none;
+  letter-spacing: normal;
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.diagram-toolbar-hint .ti {
+  font-size: 0.8rem;
+  color: var(--accent);
+}
+
 .diagram-toolbar-actions {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
+  flex-wrap: wrap;
 }
 
 .diagram-btn-action {
@@ -644,9 +666,9 @@ body::after {
   border: 1px solid rgba(198, 90, 58, 0.25);
   border-radius: 99px;
   color: var(--accent-2);
-  font-size: 0.78rem;
+  font-size: 0.76rem;
   font-weight: 600;
-  padding: 4px 12px;
+  padding: 4px 10px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
@@ -663,6 +685,13 @@ body::after {
   transform: translateY(-1px);
 }
 
+.diagram-btn-action.is-copied {
+  background: var(--success) !important;
+  color: #ffffff !important;
+  border-color: var(--success) !important;
+  box-shadow: 0 2px 8px rgba(107, 142, 78, 0.3) !important;
+}
+
 .diagram-btn-action svg,
 .diagram-btn-action .ti {
   flex-shrink: 0;
@@ -673,6 +702,85 @@ body::after {
   color: var(--accent-2);
   font-size: 1.05rem;
   margin-right: 2px;
+}
+
+/* ===== INTERACTIVE NODE FOCUS & PATH HIGHLIGHTING ===== */
+svg.diagram-interactive-canvas {
+  transition: opacity 0.2s ease;
+}
+
+svg.diagram-interactive-canvas .node,
+svg.diagram-interactive-canvas .actor {
+  cursor: pointer !important;
+  transition:
+    opacity 0.22s ease,
+    filter 0.22s ease,
+    transform 0.22s ease;
+}
+
+svg.diagram-interactive-canvas .edgePath,
+svg.diagram-interactive-canvas .edgeLabel,
+svg.diagram-interactive-canvas .messageLine0,
+svg.diagram-interactive-canvas .messageLine1,
+svg.diagram-interactive-canvas .messageText {
+  transition: opacity 0.22s ease;
+}
+
+/* Khi đang ở chế độ Focus */
+svg.diagram-has-focus .node:not(.node-focused):not(.neighbor-focused),
+svg.diagram-has-focus .actor:not(.actor-focused):not(.neighbor-focused),
+svg.diagram-has-focus text.actor:not(.actor-focused):not(.neighbor-focused) {
+  opacity: 0.16 !important;
+}
+
+svg.diagram-has-focus .edgePath:not(.edge-focused),
+svg.diagram-has-focus .edgeLabel:not(.edge-focused),
+svg.diagram-has-focus .messageLine0:not(.message-focused),
+svg.diagram-has-focus .messageLine1:not(.message-focused),
+svg.diagram-has-focus .messageText:not(.message-focused) {
+  opacity: 0.12 !important;
+}
+
+/* Node đang được Focus */
+svg.diagram-has-focus .node.node-focused,
+svg.diagram-has-focus .actor.actor-focused {
+  filter: drop-shadow(0 0 8px rgba(198, 90, 58, 0.65)) !important;
+  opacity: 1 !important;
+}
+
+svg.diagram-has-focus .node.node-focused rect,
+svg.diagram-has-focus .node.node-focused polygon,
+svg.diagram-has-focus .node.node-focused circle,
+svg.diagram-has-focus .actor.actor-focused rect {
+  stroke: var(--accent-2) !important;
+  stroke-width: 2.5px !important;
+}
+
+/* Nút láng giềng kết nối trực tiếp (Neighbors) */
+svg.diagram-has-focus .node.neighbor-focused,
+svg.diagram-has-focus .actor.neighbor-focused {
+  opacity: 1 !important;
+}
+
+/* Cạnh / Luồng kết nối trực tiếp */
+svg.diagram-has-focus .edgePath.edge-focused path,
+svg.diagram-has-focus .messageLine0.message-focused,
+svg.diagram-has-focus .messageLine1.message-focused {
+  stroke: var(--accent-2) !important;
+  stroke-width: 2.5px !important;
+  opacity: 1 !important;
+}
+
+svg.diagram-has-focus .edgePath.edge-focused defs marker path {
+  fill: var(--accent-2) !important;
+  stroke: var(--accent-2) !important;
+}
+
+svg.diagram-has-focus .edgeLabel.edge-focused,
+svg.diagram-has-focus .messageText.message-focused {
+  opacity: 1 !important;
+  font-weight: 700 !important;
+  color: var(--accent-2) !important;
 }
 
 .diagram-caption {
@@ -774,8 +882,9 @@ body::after {
 .diagram-modal-controls {
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
   flex-shrink: 0;
+  flex-wrap: wrap;
 }
 
 .diagram-modal-btn {
@@ -783,13 +892,13 @@ body::after {
   border: 1px solid rgba(198, 90, 58, 0.25);
   border-radius: 8px;
   color: var(--accent-2);
-  font-size: 0.82rem;
+  font-size: 0.8rem;
   font-weight: 600;
-  padding: 6px 12px;
+  padding: 5px 10px;
   cursor: pointer;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
+  gap: 5px;
   transition: all 0.18s ease;
   user-select: none;
 }
@@ -799,6 +908,40 @@ body::after {
   color: #ffffff;
   border-color: var(--accent-2);
   box-shadow: 0 2px 8px rgba(159, 63, 42, 0.22);
+}
+
+/* Preset Zoom Pills */
+.diagram-modal-presets {
+  display: inline-flex;
+  align-items: center;
+  background: rgba(198, 90, 58, 0.06);
+  border: 1px solid rgba(198, 90, 58, 0.2);
+  border-radius: 8px;
+  padding: 2px;
+  gap: 2px;
+}
+
+.diagram-preset-btn {
+  background: transparent;
+  border: none;
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 600;
+  padding: 3px 7px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  user-select: none;
+}
+
+.diagram-preset-btn:hover {
+  color: var(--accent-2);
+  background: rgba(198, 90, 58, 0.14);
+}
+
+.diagram-preset-btn.is-active {
+  background: var(--accent-2);
+  color: #ffffff;
 }
 
 .diagram-modal-btn.modal-close {
@@ -816,10 +959,10 @@ body::after {
 }
 
 .diagram-modal-zoom-level {
-  font-size: 0.84rem;
+  font-size: 0.82rem;
   font-weight: 700;
   color: var(--ink);
-  min-width: 48px;
+  min-width: 44px;
   text-align: center;
   font-family: var(--code-font-family);
 }

@@ -187,8 +187,12 @@
                       el.parentNode.replaceChild(cleanDiv, el);
                       cleanNodes.push(cleanDiv);
 
-                      // Thêm thanh công cụ phóng to / thu vừa khung & Fullscreen cho diagram-wrapper
                       const wrapper = cleanDiv.closest(".diagram-wrapper");
+                      if (wrapper) {
+                        wrapper._rawMermaidCode = rawCode;
+                      }
+
+                      // Thêm thanh công cụ Smart Diagram Toolbar mở rộng
                       if (wrapper && !wrapper.querySelector(".diagram-toolbar")) {
                         const toolbar = document.createElement("div");
                         toolbar.className = "diagram-toolbar";
@@ -196,11 +200,26 @@
                           <span class="diagram-toolbar-title">
                             <i class="ti ti-sitemap"></i>
                             Sơ Đồ Hệ Thống
+                            <span class="diagram-toolbar-hint" title="Bấm vào một nút trên sơ đồ để làm sáng luồng kết nối và làm mờ các thành phần khác">
+                              <i class="ti ti-pointer"></i> Click node để focus
+                            </span>
                           </span>
                           <div class="diagram-toolbar-actions">
+                            <button type="button" class="diagram-btn-action diagram-btn-copy" title="Sao chép mã nguồn Mermaid">
+                              <i class="ti ti-code"></i>
+                              <span>Sao chép mã</span>
+                            </button>
+                            <button type="button" class="diagram-btn-action diagram-btn-export-svg" title="Xuất file vector SVG sắc nét">
+                              <i class="ti ti-file-type-svg"></i>
+                              <span>SVG</span>
+                            </button>
+                            <button type="button" class="diagram-btn-action diagram-btn-export-png" title="Tải ảnh PNG độ nét cao (2x High-Res)">
+                              <i class="ti ti-file-type-png"></i>
+                              <span>PNG</span>
+                            </button>
                             <button type="button" class="diagram-btn-action diagram-btn-zoom" title="Chuyển đổi giữa chế độ vừa khung và xem kích thước gốc (1:1)">
                               <i class="ti ti-arrows-maximize"></i>
-                              <span>Xem kích thước gốc</span>
+                              <span>Xem 1:1</span>
                             </button>
                             <button type="button" class="diagram-btn-action diagram-btn-fullscreen" title="Mở modal xem toàn màn hình tương tác (Fullscreen)">
                               <i class="ti ti-maximize"></i>
@@ -209,7 +228,34 @@
                           </div>
                         `;
 
-                        // Xử lý nút Zoom kích thước gốc
+                        // Xử lý nút Sao chép mã Mermaid
+                        const btnCopy = toolbar.querySelector(".diagram-btn-copy");
+                        btnCopy.addEventListener("click", function (e) {
+                          e.preventDefault();
+                          copyMermaidCode(wrapper._rawMermaidCode, btnCopy);
+                        });
+
+                        // Xử lý nút Xuất SVG
+                        const btnExportSVG = toolbar.querySelector(".diagram-btn-export-svg");
+                        btnExportSVG.addEventListener("click", function (e) {
+                          e.preventDefault();
+                          const svg = wrapper.querySelector(".mermaid svg");
+                          const captionEl = wrapper.querySelector(".diagram-caption");
+                          const title = captionEl ? captionEl.textContent.trim() : "diagram";
+                          exportDiagramSVG(svg, title);
+                        });
+
+                        // Xử lý nút Tải PNG
+                        const btnExportPNG = toolbar.querySelector(".diagram-btn-export-png");
+                        btnExportPNG.addEventListener("click", function (e) {
+                          e.preventDefault();
+                          const svg = wrapper.querySelector(".mermaid svg");
+                          const captionEl = wrapper.querySelector(".diagram-caption");
+                          const title = captionEl ? captionEl.textContent.trim() : "diagram";
+                          exportDiagramPNG(svg, title, 2);
+                        });
+
+                        // Xử lý nút Zoom kích thước gốc (1:1)
                         const btnZoom = toolbar.querySelector(".diagram-btn-zoom");
                         btnZoom.addEventListener("click", function (e) {
                           e.preventDefault();
@@ -231,7 +277,7 @@
                               svg.style.removeProperty("width");
                               svg.style.removeProperty("max-width");
                             }
-                            btnZoom.innerHTML = '<i class="ti ti-arrows-maximize"></i><span>Xem kích thước gốc</span>';
+                            btnZoom.innerHTML = '<i class="ti ti-arrows-maximize"></i><span>Xem 1:1</span>';
                             btnZoom.style.background = "";
                             btnZoom.style.color = "";
                             wrapper.scrollLeft = 0;
@@ -260,15 +306,322 @@
                         .run({
                           nodes: cleanNodes,
                         })
+                        .then(() => {
+                          // Kích hoạt tính năng Interactive Node Focus & Path Highlight sau khi SVG được render
+                          cleanNodes.forEach((node) => {
+                            const svg = node.querySelector("svg");
+                            if (svg) {
+                              setupDiagramFocusInteractivity(svg);
+                            }
+                          });
+                        })
                         .catch((err) => {
                           console.warn("Lỗi vẽ sơ đồ Mermaid: ", err);
                         });
                     }
                   }
 
-                  // ==========================================
-                  // QUẢN LÝ MODAL FULLSCREEN CHO TẤT CẢ SƠ ĐỒ
-                  // ==========================================
+                  // ==============================================================
+                  // CÁC HÀM TIỆN ÍCH XUẤT ẢNH VECTOR & RASTER & SAO CHÉP MÃ NGUỒN
+                  // ==============================================================
+                  function getSanitizedFilename(title) {
+                    let name = (title || "diagram")
+                      .toLowerCase()
+                      .normalize("NFD")
+                      .replace(/[\u0300-\u036f]/g, "")
+                      .replace(/[^a-z0-9]+/g, "-")
+                      .replace(/^-+|-+$/g, "");
+                    return name || "diagram";
+                  }
+
+                  function copyMermaidCode(rawCode, btnElement) {
+                    if (!rawCode) return;
+                    navigator.clipboard
+                      .writeText(rawCode)
+                      .then(() => {
+                        btnElement.classList.add("is-copied");
+                        const oldHTML = btnElement.innerHTML;
+                        btnElement.innerHTML = '<i class="ti ti-check"></i><span>Đã sao chép!</span>';
+                        setTimeout(() => {
+                          btnElement.classList.remove("is-copied");
+                          btnElement.innerHTML = oldHTML;
+                        }, 2000);
+                      })
+                      .catch((err) => {
+                        console.error("Lỗi khi sao chép mã Mermaid: ", err);
+                      });
+                  }
+
+                  function exportDiagramSVG(svgElement, title) {
+                    if (!svgElement) return;
+                    const clone = svgElement.cloneNode(true);
+                    clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+                    clone.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
+
+                    const vb = clone.getAttribute("viewBox");
+                    let width = 1600,
+                      height = 900;
+                    if (vb) {
+                      const parts = vb.trim().split(/\s+/);
+                      if (parts.length === 4) {
+                        width = parseFloat(parts[2]);
+                        height = parseFloat(parts[3]);
+                      }
+                    } else {
+                      width = clone.clientWidth || 1600;
+                      height = clone.clientHeight || 900;
+                    }
+
+                    clone.setAttribute("width", width);
+                    clone.setAttribute("height", height);
+                    clone.style.width = width + "px";
+                    clone.style.height = height + "px";
+                    clone.style.maxWidth = "none";
+
+                    // Chèn rect nền sáng để hiển thị đẹp trên mọi ứng dụng
+                    const bgRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                    bgRect.setAttribute("width", "100%");
+                    bgRect.setAttribute("height", "100%");
+                    bgRect.setAttribute("fill", "#fffdf9");
+                    clone.insertBefore(bgRect, clone.firstChild);
+
+                    const serializer = new XMLSerializer();
+                    let svgString = serializer.serializeToString(clone);
+                    if (!svgString.match(/^<svg[^>]+xmlns="http:\/\/www\.w3\.org\/2000\/svg"/)) {
+                      svgString = svgString.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+                    }
+
+                    const blob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
+                    const url = URL.createObjectURL(blob);
+                    const a = document.createElement("a");
+                    a.href = url;
+                    a.download = getSanitizedFilename(title) + ".svg";
+                    document.body.appendChild(a);
+                    a.click();
+                    document.body.removeChild(a);
+                    setTimeout(() => URL.revokeObjectURL(url), 1000);
+                  }
+
+                  function exportDiagramPNG(svgElement, title, scaleFactor) {
+                    if (!svgElement) return;
+                    scaleFactor = scaleFactor || 2;
+                    const clone = svgElement.cloneNode(true);
+                    clone.setAttribute("xmlns", "http://www.w3.org/2000/svg");
+                    clone.setAttribute("xmlns:xlink", "http://www.w3.org/1999/xlink");
+
+                    const vb = clone.getAttribute("viewBox");
+                    let width = 1600,
+                      height = 900;
+                    if (vb) {
+                      const parts = vb.trim().split(/\s+/);
+                      if (parts.length === 4) {
+                        width = parseFloat(parts[2]);
+                        height = parseFloat(parts[3]);
+                      }
+                    } else {
+                      width = clone.clientWidth || 1600;
+                      height = clone.clientHeight || 900;
+                    }
+
+                    const bgRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
+                    bgRect.setAttribute("width", "100%");
+                    bgRect.setAttribute("height", "100%");
+                    bgRect.setAttribute("fill", "#fffdf9");
+                    clone.insertBefore(bgRect, clone.firstChild);
+
+                    const serializer = new XMLSerializer();
+                    let svgString = serializer.serializeToString(clone);
+                    if (!svgString.match(/^<svg[^>]+xmlns="http:\/\/www\.w3\.org\/2000\/svg"/)) {
+                      svgString = svgString.replace(/^<svg/, '<svg xmlns="http://www.w3.org/2000/svg"');
+                    }
+
+                    const blob = new Blob([svgString], { type: "image/svg+xml;charset=utf-8" });
+                    const url = URL.createObjectURL(blob);
+                    const img = new Image();
+                    img.crossOrigin = "anonymous";
+                    img.onload = function () {
+                      const canvas = document.createElement("canvas");
+                      canvas.width = Math.round(width * scaleFactor);
+                      canvas.height = Math.round(height * scaleFactor);
+                      const ctx = canvas.getContext("2d");
+
+                      ctx.fillStyle = "#fffdf9";
+                      ctx.fillRect(0, 0, canvas.width, canvas.height);
+                      ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+                      URL.revokeObjectURL(url);
+
+                      canvas.toBlob(function (pngBlob) {
+                        if (!pngBlob) return;
+                        const pngUrl = URL.createObjectURL(pngBlob);
+                        const a = document.createElement("a");
+                        a.href = pngUrl;
+                        a.download = getSanitizedFilename(title) + ".png";
+                        document.body.appendChild(a);
+                        a.click();
+                        document.body.removeChild(a);
+                        setTimeout(() => URL.revokeObjectURL(pngUrl), 1000);
+                      }, "image/png");
+                    };
+                    img.onerror = function (err) {
+                      console.error("Lỗi khi tải ảnh SVG vào Canvas PNG: ", err);
+                      URL.revokeObjectURL(url);
+                    };
+                    img.src = url;
+                  }
+
+                  // ==============================================================
+                  // THUẬT TOÁN INTERACTIVE NODE FOCUS & PATH HIGHLIGHTING
+                  // ==============================================================
+                  function setupDiagramFocusInteractivity(svg) {
+                    if (!svg || svg.__focusInitialized) return;
+                    svg.__focusInitialized = true;
+                    svg.classList.add("diagram-interactive-canvas");
+
+                    const nodes = Array.from(svg.querySelectorAll(".node, .actor"));
+                    if (nodes.length === 0) return;
+
+                    const edges = Array.from(svg.querySelectorAll(".edgePath, .messageLine0, .messageLine1"));
+                    const edgeLabels = Array.from(svg.querySelectorAll(".edgeLabel, .messageText"));
+
+                    function getNodeKey(nodeEl) {
+                      if (nodeEl.getAttribute("data-id")) return nodeEl.getAttribute("data-id");
+                      const id = nodeEl.id || "";
+                      const match = id.match(/^flowchart-([^-]+(?:-[^-]+)*)-\d+$/);
+                      if (match) return match[1];
+                      if (nodeEl.classList.contains("actor")) {
+                        return (nodeEl.textContent || id).trim();
+                      }
+                      return id;
+                    }
+
+                    // Bản đồ quan hệ các cạnh (Edge Mapping)
+                    const edgeMap = [];
+                    edges.forEach((edgeEl, idx) => {
+                      const classList = Array.from(edgeEl.classList);
+                      let src = null,
+                        tgt = null;
+
+                      classList.forEach((cls) => {
+                        if (cls.startsWith("LS-")) src = cls.substring(3);
+                        if (cls.startsWith("LE-")) tgt = cls.substring(3);
+                      });
+
+                      if (!src || !tgt) {
+                        const id = edgeEl.id || "";
+                        const idMatch = id.match(/^L[_-]([^-]+)[_-]([^-]+)$/);
+                        if (idMatch) {
+                          src = idMatch[1];
+                          tgt = idMatch[2];
+                        }
+                      }
+
+                      // Dự phòng liên kết hình học: kiểm tra tọa độ start/end path với bounding box
+                      const path = edgeEl.querySelector("path");
+                      if ((!src || !tgt) && path && typeof path.getPointAtLength === "function") {
+                        try {
+                          const totalLen = path.getTotalLength();
+                          if (totalLen > 0) {
+                            const ptStart = path.getPointAtLength(0);
+                            const ptEnd = path.getPointAtLength(totalLen);
+                            nodes.forEach((n) => {
+                              try {
+                                const bb = n.getBBox();
+                                const pad = 35;
+                                if (
+                                  !src &&
+                                  ptStart.x >= bb.x - pad &&
+                                  ptStart.x <= bb.x + bb.width + pad &&
+                                  ptStart.y >= bb.y - pad &&
+                                  ptStart.y <= bb.y + bb.height + pad
+                                ) {
+                                  src = getNodeKey(n);
+                                }
+                                if (
+                                  !tgt &&
+                                  ptEnd.x >= bb.x - pad &&
+                                  ptEnd.x <= bb.x + bb.width + pad &&
+                                  ptEnd.y >= bb.y - pad &&
+                                  ptEnd.y <= bb.y + bb.height + pad
+                                ) {
+                                  tgt = getNodeKey(n);
+                                }
+                              } catch (e) {}
+                            });
+                          }
+                        } catch (e) {}
+                      }
+
+                      edgeMap.push({
+                        edgeEl: edgeEl,
+                        labelEl: edgeLabels[idx] || null,
+                        src: src,
+                        tgt: tgt,
+                      });
+                    });
+
+                    function clearFocus() {
+                      svg.classList.remove("diagram-has-focus");
+                      nodes.forEach((n) => n.classList.remove("node-focused", "neighbor-focused", "actor-focused"));
+                      edges.forEach((e) => e.classList.remove("edge-focused", "message-focused"));
+                      edgeLabels.forEach((l) => l.classList.remove("edge-focused", "message-focused"));
+                    }
+
+                    function focusNode(targetNode) {
+                      const isAlreadyFocused = targetNode.classList.contains("node-focused");
+                      clearFocus();
+                      if (isAlreadyFocused) return;
+
+                      svg.classList.add("diagram-has-focus");
+                      targetNode.classList.add("node-focused");
+
+                      const targetKey = getNodeKey(targetNode);
+                      if (!targetKey) return;
+
+                      const neighborKeys = new Set();
+                      const lowerTarget = targetKey.toLowerCase();
+
+                      edgeMap.forEach((entry) => {
+                        const lowerSrc = entry.src ? entry.src.toLowerCase() : "";
+                        const lowerTgt = entry.tgt ? entry.tgt.toLowerCase() : "";
+                        if (lowerSrc === lowerTarget || lowerTgt === lowerTarget) {
+                          entry.edgeEl.classList.add("edge-focused");
+                          if (entry.labelEl) entry.labelEl.classList.add("edge-focused");
+                          if (lowerSrc && lowerSrc !== lowerTarget) neighborKeys.add(lowerSrc);
+                          if (lowerTgt && lowerTgt !== lowerTarget) neighborKeys.add(lowerTgt);
+                        }
+                      });
+
+                      nodes.forEach((n) => {
+                        const k = getNodeKey(n);
+                        if (k && neighborKeys.has(k.toLowerCase())) {
+                          n.classList.add("neighbor-focused");
+                        }
+                      });
+
+                      if (targetNode.classList.contains("actor")) {
+                        targetNode.classList.add("actor-focused");
+                        edges.forEach((e) => e.classList.add("message-focused"));
+                        edgeLabels.forEach((l) => l.classList.add("message-focused"));
+                      }
+                    }
+
+                    nodes.forEach((nodeEl) => {
+                      nodeEl.addEventListener("click", function (e) {
+                        e.stopPropagation();
+                        focusNode(nodeEl);
+                      });
+                    });
+
+                    svg.addEventListener("click", function (e) {
+                      if (!e.target.closest(".node, .actor")) {
+                        clearFocus();
+                      }
+                    });
+                  }
+
+                  // ==============================================================
+                  // QUẢN LÝ MODAL FULLSCREEN CHO TẤT CẢ SƠ ĐỒ (Figma/Miro Level)
+                  // ==============================================================
                   function openDiagramModal(wrapper) {
                     const svg = wrapper.querySelector(".mermaid svg");
                     if (!svg) return;
@@ -297,9 +650,26 @@
                             <button type="button" class="diagram-modal-btn modal-zoom-in" title="Phóng to (Phím +)">
                               <i class="ti ti-plus"></i>
                             </button>
-                            <button type="button" class="diagram-modal-btn modal-zoom-reset" title="Khôi phục vừa khung (Phím 0)">
-                              <i class="ti ti-arrows-minimize"></i>
-                              <span>Vừa khung</span>
+                            <div class="diagram-modal-presets">
+                              <button type="button" class="diagram-preset-btn modal-preset-fit is-active" data-scale="fit" title="Khôi phục vừa khít khung (Phím 0)">Fit</button>
+                              <button type="button" class="diagram-preset-btn" data-scale="0.5" title="Thu nhỏ 50% (Phím 5)">50%</button>
+                              <button type="button" class="diagram-preset-btn" data-scale="1" title="Kích thước gốc 100% (Phím 1)">100%</button>
+                              <button type="button" class="diagram-preset-btn" data-scale="1.5" title="Phóng to 150%">150%</button>
+                              <button type="button" class="diagram-preset-btn" data-scale="2" title="Phóng to 200% (Phím 2)">200%</button>
+                            </div>
+                            <div class="diagram-modal-divider"></div>
+                            <button type="button" class="diagram-modal-btn modal-native-fullscreen" title="Toàn màn hình trình duyệt (Phím F)">
+                              <i class="ti ti-maximize"></i>
+                              <span>F11</span>
+                            </button>
+                            <div class="diagram-modal-divider"></div>
+                            <button type="button" class="diagram-modal-btn modal-export-svg" title="Xuất file vector SVG sắc nét">
+                              <i class="ti ti-file-type-svg"></i>
+                              <span>SVG</span>
+                            </button>
+                            <button type="button" class="diagram-modal-btn modal-export-png" title="Tải ảnh PNG độ nét cao (2x High-Res)">
+                              <i class="ti ti-file-type-png"></i>
+                              <span>PNG</span>
                             </button>
                             <div class="diagram-modal-divider"></div>
                             <button type="button" class="diagram-modal-btn modal-close" title="Đóng (Phím Esc)">
@@ -314,7 +684,7 @@
                           </div>
                         </div>
                         <div class="diagram-modal-footer">
-                          <span><i class="ti ti-info-circle"></i> <b>Cuộn chuột</b> để phóng to/thu nhỏ • <b>Nhấn giữ chuột trái & kéo</b> để di chuyển sơ đồ • Nhấn <b>Esc</b> để đóng</span>
+                          <span><i class="ti ti-info-circle"></i> <b>Cuộn chuột</b> để zoom • <b>Kéo chuột</b> để lia • <b>Click node</b> để làm nổi bật luồng kết nối • Phím tắt: <b>1 / 2 / 5 / 0 / F / Esc</b></span>
                         </div>
                       </div>
                     `;
@@ -325,10 +695,13 @@
                       const closeBtn = modal.querySelector(".modal-close");
                       const zoomInBtn = modal.querySelector(".modal-zoom-in");
                       const zoomOutBtn = modal.querySelector(".modal-zoom-out");
-                      const resetBtn = modal.querySelector(".modal-zoom-reset");
                       const zoomLabel = modal.querySelector(".diagram-modal-zoom-level");
                       const viewport = modal.querySelector(".diagram-modal-viewport");
                       const content = modal.querySelector(".diagram-modal-content");
+                      const presetBtns = modal.querySelectorAll(".diagram-preset-btn");
+                      const nativeFsBtn = modal.querySelector(".modal-native-fullscreen");
+                      const modalExportSVGBtn = modal.querySelector(".modal-export-svg");
+                      const modalExportPNGBtn = modal.querySelector(".modal-export-png");
 
                       let currentScale = 1;
                       let panX = 0;
@@ -342,10 +715,21 @@
                         zoomLabel.textContent = Math.round(currentScale * 100) + "%";
                       }
 
+                      function updateActivePreset(scaleVal) {
+                        presetBtns.forEach((btn) => {
+                          const s = btn.getAttribute("data-scale");
+                          if (s === String(scaleVal) || (scaleVal === "fit" && s === "fit")) {
+                            btn.classList.add("is-active");
+                          } else {
+                            btn.classList.remove("is-active");
+                          }
+                        });
+                      }
+
                       function resetView() {
-                        const svg = content.querySelector("svg");
-                        if (svg) {
-                          const vb = svg.getAttribute("viewBox");
+                        const svgInside = content.querySelector("svg");
+                        if (svgInside) {
+                          const vb = svgInside.getAttribute("viewBox");
                           const parts = vb ? vb.trim().split(/\s+/) : [];
                           const nativeWidth = parts.length === 4 ? parseFloat(parts[2]) : 1600;
                           const nativeHeight = parts.length === 4 ? parseFloat(parts[3]) : 900;
@@ -359,6 +743,15 @@
                         panX = 0;
                         panY = 0;
                         applyTransform();
+                        updateActivePreset("fit");
+                      }
+
+                      function setPresetScale(targetScale) {
+                        currentScale = Math.min(Math.max(0.15, targetScale), 5);
+                        panX = 0;
+                        panY = 0;
+                        applyTransform();
+                        updateActivePreset(targetScale);
                       }
 
                       function zoom(delta, clientX, clientY) {
@@ -377,11 +770,62 @@
 
                         currentScale = newScale;
                         applyTransform();
+                        presetBtns.forEach((btn) => btn.classList.remove("is-active"));
                       }
 
                       zoomInBtn.addEventListener("click", () => zoom(0.2));
                       zoomOutBtn.addEventListener("click", () => zoom(-0.2));
-                      resetBtn.addEventListener("click", resetView);
+
+                      presetBtns.forEach((btn) => {
+                        btn.addEventListener("click", function (e) {
+                          e.preventDefault();
+                          const scale = btn.getAttribute("data-scale");
+                          if (scale === "fit") {
+                            resetView();
+                          } else {
+                            setPresetScale(parseFloat(scale));
+                          }
+                        });
+                      });
+
+                      // Native Fullscreen Toggle (F11 API)
+                      function toggleNativeFullscreen() {
+                        if (!document.fullscreenElement) {
+                          modal.requestFullscreen().catch((err) => console.warn(err));
+                        } else {
+                          document.exitFullscreen().catch((err) => console.warn(err));
+                        }
+                      }
+
+                      nativeFsBtn.addEventListener("click", function (e) {
+                        e.preventDefault();
+                        toggleNativeFullscreen();
+                      });
+
+                      document.addEventListener("fullscreenchange", function () {
+                        if (document.fullscreenElement) {
+                          nativeFsBtn.innerHTML = '<i class="ti ti-minimize"></i><span>F11</span>';
+                          nativeFsBtn.title = "Thoát toàn màn hình (Phím F hoặc Esc)";
+                        } else {
+                          nativeFsBtn.innerHTML = '<i class="ti ti-maximize"></i><span>F11</span>';
+                          nativeFsBtn.title = "Toàn màn hình trình duyệt (Phím F)";
+                        }
+                      });
+
+                      // Xuất ảnh từ trong Modal
+                      modalExportSVGBtn.addEventListener("click", function (e) {
+                        e.preventDefault();
+                        const currentSvg = content.querySelector("svg");
+                        const title = modal.querySelector(".diagram-modal-caption-text").textContent;
+                        exportDiagramSVG(currentSvg, title);
+                      });
+
+                      modalExportPNGBtn.addEventListener("click", function (e) {
+                        e.preventDefault();
+                        const currentSvg = content.querySelector("svg");
+                        const title = modal.querySelector(".diagram-modal-caption-text").textContent;
+                        exportDiagramPNG(currentSvg, title, 2);
+                      });
 
                       // Cuộn chuột zoom theo con trỏ chuột
                       viewport.addEventListener(
@@ -418,6 +862,9 @@
                       });
 
                       function closeModal() {
+                        if (document.fullscreenElement) {
+                          document.exitFullscreen().catch(() => {});
+                        }
                         modal.classList.remove("is-open");
                         document.body.style.overflow = "";
                         window.removeEventListener("keydown", handleKeydown);
@@ -432,6 +879,14 @@
                           zoom(-0.2);
                         } else if (e.key === "0") {
                           resetView();
+                        } else if (e.key === "1") {
+                          setPresetScale(1.0);
+                        } else if (e.key === "2") {
+                          setPresetScale(2.0);
+                        } else if (e.key === "5") {
+                          setPresetScale(0.5);
+                        } else if (e.key === "f" || e.key === "F") {
+                          toggleNativeFullscreen();
                         }
                       }
 
@@ -457,6 +912,8 @@
 
                         content.innerHTML = "";
                         content.appendChild(cloneSvg);
+                        setupDiagramFocusInteractivity(cloneSvg); // Kích hoạt Interactive Focus trong Modal
+
                         modal.classList.add("is-open");
                         document.body.style.overflow = "hidden";
                         window.addEventListener("keydown", handleKeydown);
