@@ -16,6 +16,9 @@ Tất cả các thay đổi đáng chú ý của dự án **Spec UI System** s�
 - **Giải Quyết Triệt Để Điểm Va Chạm Header (Zero Header Collision)**:
   - Tối ưu nhãn nút Theme Switcher thành dạng súc tích (`Tự động` hoặc tên theme ngắn gọn), chấm dứt hiện tượng nút bấm dài gần 300px che lấp menu "Agent Setup".
   - Tăng khoảng đệm đỉnh `.markdown-section` lên `84px !important`, tạo khoảng cách thở 76.5px rộng rãi, khoáng đạt giữa thanh menu trên và tiêu đề H1 trên mọi độ phân giải.
+- **Đồng Bộ Hoàn Toàn Font-Size Trên Thanh Điều Hướng (Navbar Font-Size Parity)**:
+  - Khắc phục lỗi lệch cỡ chữ giữa các mục liên kết `<a>` (`13.2px / 0.88rem`, `font-weight: 500`) và các tiêu đề nhóm dropdown `<span>` (`15px / 1rem`, `font-weight: 400`, `line-height: 25.5px`) do bộ chọn cũ chỉ áp dụng cho `.app-nav a`.
+  - Mở rộng selector `.app-nav a, .app-nav span` dùng chung chuẩn `font-size: 0.88rem`, `font-weight: 500`, `line-height: 1.5` và canh lề baseline chuẩn mực, thống nhất hoàn hảo với nút Theme Switcher.
 - **Hệ Thống Header Thích Ứng Đa Điểm Gãy (Multi-Breakpoint Responsive Header)**:
   - Màn hình Desktop rộng (>= 1281px): Navbar hiển thị đầy đủ, cách nút Theme Switcher 33px an toàn.
   - Màn hình Laptop nhỏ (<= 1280px): Nút Theme Switcher tự động co về dạng icon pill tối giản `[ 🎨 ▾ ]` (44px), giải phóng không gian cho `.app-nav` nằm gọn gàng bên phải (`right: 76px`).

@@ -888,22 +888,39 @@ body::after {
   transition: right 0.2s ease !important;
 }
 
-.app-nav a {
+.app-nav li {
+  margin: 0 8px !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
+  line-height: 1 !important;
+}
+
+/* Đồng bộ 100% cỡ chữ, kiểu chữ, màu sắc giữa liên kết thường và dropdown header */
+.app-nav a,
+.app-nav span {
   color: var(--muted) !important;
   font-family: var(--base-font-family) !important;
   font-size: 0.88rem !important;
   font-weight: 500 !important;
+  line-height: 1.5 !important;
   text-decoration: none !important;
+  cursor: pointer !important;
+  display: inline-block !important;
+  vertical-align: middle !important;
   transition: all 0.2s ease !important;
 }
 
 .app-nav a:hover,
-.app-nav a.active {
+.app-nav a.active,
+.app-nav li:hover > span,
+.app-nav li:hover > a {
   color: var(--accent) !important;
 }
 
-.app-nav li {
-  margin: 0 8px !important;
+/* Bảo toàn icon mũi tên dropdown và padding phải */
+.app-nav > ul > li > span:not(:last-child),
+.app-nav > ul > li > a:not(:last-child) {
+  padding: 0 18px 0 0 !important;
 }
 
 .app-nav li ul {
@@ -913,21 +930,29 @@ body::after {
   border-radius: var(--radius-sm) !important;
   padding: 8px 6px !important;
   min-width: 190px !important;
+  top: calc(100% + 8px) !important;
 }
 
 .app-nav li ul li {
   margin: 2px 0 !important;
+  display: block !important;
 }
 
-.app-nav li ul li a {
+.app-nav li ul li a,
+.app-nav li ul li span {
   color: var(--ink) !important;
+  font-family: var(--base-font-family) !important;
+  font-size: 0.84rem !important;
+  font-weight: 500 !important;
+  line-height: 1.4 !important;
   padding: 6px 12px !important;
   border-radius: 6px !important;
   display: block !important;
-  font-size: 0.84rem !important;
+  cursor: pointer !important;
 }
 
-.app-nav li ul li a:hover {
+.app-nav li ul li a:hover,
+.app-nav li ul li span:hover {
   color: var(--accent) !important;
   background: var(--menu-hover) !important;
 }
@@ -1926,8 +1951,9 @@ html[data-theme="solarized-paper"] .mermaid svg .label {
   border-radius: 99px;
   color: var(--ink);
   font-family: var(--base-font-family);
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 0.88rem !important;
+  font-weight: 500 !important;
+  line-height: 1.5 !important;
   cursor: pointer;
   box-shadow: var(--shadow);
   backdrop-filter: blur(10px);
