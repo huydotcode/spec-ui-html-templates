@@ -4,6 +4,33 @@ Tất cả các thay đổi đáng chú ý của dự án **Spec UI System** s�
 
 Định dạng tài liệu tuân thủ theo tiêu chuẩn [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) và tuân theo [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.4.0] - 2026-09-15
+
+### Multi-Theme Engine & Obsidian Dark Mode (Kiến Trúc Đa Giao Diện & Chế Độ Tối)
+
+#### Đã Thêm Mới (Added)
+
+- **Hệ Thống Đa Giao Diện Cắm Rút (Pluggable Multi-Theme Architecture)**:
+  - Hỗ trợ 5 bộ Theme Tokens được tinh chỉnh tỉ mỉ theo tiêu chuẩn Tech Portal cao cấp:
+    1. `warm-terracotta` (Mặc định sáng): Gam màu Đất nung & Kem ấm (`#faf7f2`, `#fffdf9`, `#9f3f2a`, `#c65a3a`).
+    2. `obsidian-terracotta` (Tối cao cấp): Nền than đen ấm đá Obsidian (`#141210`), surface (`#1e1a17`) và điểm nhấn Đất nung rực sáng (`#e2725b`).
+    3. `nordic-slate` (Tối Bắc Âu): Nền đá phiến than lạnh (`#0b0f19`), surface (`#111827`) và viền xanh băng (`#38bdf8`).
+    4. `forest-sage` (Tối Rừng sâu): Nền ngọc lục bảo thẫm (`#091310`), surface (`#111f1a`) và điểm nhấn ngọc bích (`#34d399`).
+    5. `solarized-paper` (Sách cổ Sepia): Gam màu giấy ngả vàng (`#fbf5e6`), surface (`#f5ebd4`) và điểm nhấn hổ phách (`#b58900`).
+  - Chế độ **Tự động theo hệ thống (Auto)**: Lắng nghe sự kiện `prefers-color-scheme` của hệ điều hành để tự động chuyển giao diện theo thời gian thực.
+- **Bộ Khởi Động Chống Nháy Sáng (Zero-Flash Anti-FOUC Bootloader)**:
+  - Script siêu nhẹ đặt ngay đầu thẻ `<head>` đọc `localStorage` và áp dụng thuộc tính `data-theme` trước khi CSS render, loại bỏ hoàn toàn hiện tượng nháy trắng (Flash of White) khi F5 tải lại trang ở chế độ tối.
+- **Menu Chuyển Đổi Giao Diện Nổi (Floating Theme Switcher Dropdown)**:
+  - Nút bấm nổi góc phải màn hình với icon bảng màu (`palette`).
+  - Menu xổ lên với các tùy chọn kèm Swatch màu hai tông (Background / Accent) và icon check đánh dấu theme đang kích hoạt.
+  - Đóng mở mượt mà bằng click ngoài hoặc phím `Escape`.
+- **Tự Động Đổi Theme Sơ Đồ Mermaid Theo Thời Gian Thực (Live Re-rendering)**:
+  - Khi người dùng đổi theme, toàn bộ sơ đồ Mermaid trong trang và Modal được vẽ lại ngay lập tức với theme Mermaid tương ứng (`default` cho theme sáng, `dark` cho theme tối) mà không cần tải lại trang.
+  - Bảo tồn toàn vẹn tính năng Interactive Node Focus & Path Highlight sau khi re-render.
+  - Bộ xuất ảnh SVG và PNG độ phân giải cao tự động lấy màu nền của theme hiện tại để chèn vào file xuất ra.
+
+---
+
 ## [2.3.0] - 2026-09-15
 
 ### Mermaid Pro Interactive Suite (Bộ Tương Tác Sơ Đồ Chuyên Sâu)

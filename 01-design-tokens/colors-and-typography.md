@@ -78,3 +78,23 @@ Hệ thống sử dụng bộ **Tabler Icons (Webfont CDN)** với triết lý t
   - Tuyệt đối không chèn emoji hoạt hình hoặc icon trang trí vào tiêu đề các cấp (H1, H2, H3) và thanh điều hướng.
   - Icon chỉ xuất hiện khi phục vụ một mục đích công năng rõ rệt (chỉ dẫn trạng thái Callout, nút bấm Toolbar, công cụ phóng to/thu nhỏ, điều hướng phân trang).
 - **Quy chuẩn hiển thị**: Nét vẽ `stroke-width: 1.5px - 2px`, tự động thừa hưởng màu chữ qua `currentColor`.
+
+---
+
+## 5. Hệ Thống Đa Giao Diện (Multi-Theme Palette Tokens)
+
+Hệ thống cung cấp kiến trúc đa theme cắm rút (Pluggable Multi-Theme Architecture) thông qua thuộc tính `data-theme` trên thẻ `<html>`, lưu trữ trạng thái tại `localStorage.getItem('spec-ui-theme')` và hỗ trợ chống nháy sáng Anti-FOUC ngay từ `<head>`.
+
+### Bảng Ma Trận Màu Sắc 5 Giao Diện Chuẩn
+
+| Giao Diện (Theme ID)                            |      Loại       | Nền Chính (`--bg`) | Thẻ Card (`--surface`) | Chữ Chính (`--ink`) | Chữ Phụ (`--muted`) | Nhấn Chính (`--accent`) | Đường Viền (`--line`) |
+| :---------------------------------------------- | :-------------: | :----------------: | :--------------------: | :-----------------: | :-----------------: | :---------------------: | :-------------------: |
+| **Warm Terracotta** (`warm-terracotta`)         | Sáng (Mặc định) |     `#faf7f2`      |       `#fffdf9`        |      `#2b211e`      |      `#7a6a61`      |        `#c65a3a`        |       `#e3d8d0`       |
+| **Obsidian Terracotta** (`obsidian-terracotta`) |       Tối       |     `#141210`      |       `#1e1a17`        |      `#ede6df`      |      `#a3968c`      |        `#e2725b`        |       `#332c26`       |
+| **Nordic Slate** (`nordic-slate`)               |       Tối       |     `#0b0f19`      |       `#111827`        |      `#f1f5f9`      |      `#94a3b8`      |        `#38bdf8`        |       `#1e293b`       |
+| **Forest Sage** (`forest-sage`)                 |       Tối       |     `#091310`      |       `#111f1a`        |      `#ecfdf5`      |      `#86a397`      |        `#34d399`        |       `#1b332b`       |
+| **Solarized Paper** (`solarized-paper`)         |      Sáng       |     `#fbf5e6`      |       `#f5ebd4`        |      `#3f3932`      |      `#81786c`      |        `#b58900`        |       `#decfa9`       |
+
+<div class="callout info">
+  <i class="ti ti-palette"></i> <strong>Cơ chế tự động thích ứng Sơ đồ Mermaid:</strong> Khi chuyển đổi qua lại giữa các theme, hệ thống tự động khởi tạo lại Mermaid engine với chế độ màu tối (Dark) hoặc sáng (Default), đồng bộ màu nền vector SVG/PNG khi tải về và bảo tồn 100% tính năng Interactive Node Focus.
+</div>

@@ -7,6 +7,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0" />
     <link rel="icon" href="favicon.ico" type="image/x-icon" />
 
+    <!-- Anti-FOUC Early Theme Bootloader (Chống chớp sáng trắng tuyệt đối) -->
+    <script>
+      (function () {
+        try {
+          var saved = localStorage.getItem("spec-ui-theme") || "auto";
+          var applied = saved;
+          if (saved === "auto") {
+            var isDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+            applied = isDark ? "obsidian-terracotta" : "warm-terracotta";
+          }
+          document.documentElement.setAttribute("data-theme", applied);
+        } catch (e) {}
+      })();
+    </script>
+
     <!-- Base Theme Themeable -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/docsify-themeable@0/dist/css/theme-simple.css" />
 
@@ -26,6 +41,173 @@
     <div id="app">Đang tải tài liệu đặc tả hệ thống...</div>
 
     <script>
+      // ==============================================================
+      // SPEC UI MULTI-THEME REGISTRY & ENGINE (v2.4.0)
+      // ==============================================================
+      const THEME_REGISTRY = [
+        {
+          id: "warm-terracotta",
+          name: "Warm Terracotta",
+          type: "light",
+          icon: "ti-sun",
+          swatchBg: "#faf7f2",
+          swatchAccent: "#c65a3a",
+          mermaidTheme: "base",
+          mermaidVars: {
+            fontFamily: '"Be Vietnam Pro", "Segoe UI", sans-serif',
+            fontSize: "13px",
+            primaryColor: "#fffaf2",
+            primaryBorderColor: "#e5d9c8",
+            primaryTextColor: "#1b2430",
+            lineColor: "#0f6b63",
+            arrowheadColor: "#0f6b63",
+            background: "#ffffff",
+            clusterBkg: "#fbf8f3",
+            clusterBorder: "#e5d9c8",
+            actorBkg: "#fffaf2",
+            actorBorder: "#e5d9c8",
+            actorTextColor: "#1b2430",
+            signalColor: "#0f6b63",
+            signalTextColor: "#4b5563",
+            labelBoxBkgColor: "#fbf8f3",
+            labelBoxBorderColor: "#e5d9c8",
+            loopBkgColor: "#faf6ee",
+          },
+        },
+        {
+          id: "obsidian-terracotta",
+          name: "Obsidian Terracotta",
+          type: "dark",
+          icon: "ti-moon",
+          swatchBg: "#141210",
+          swatchAccent: "#e07a5f",
+          mermaidTheme: "dark",
+          mermaidVars: {
+            fontFamily: '"Be Vietnam Pro", "Segoe UI", sans-serif',
+            fontSize: "13px",
+            primaryColor: "#26201c",
+            primaryBorderColor: "#4a3c34",
+            primaryTextColor: "#f5ede6",
+            lineColor: "#e07a5f",
+            arrowheadColor: "#e07a5f",
+            background: "#1e1a17",
+            clusterBkg: "#171412",
+            clusterBorder: "#382e28",
+            actorBkg: "#26201c",
+            actorBorder: "#4a3c34",
+            actorTextColor: "#f5ede6",
+            signalColor: "#e07a5f",
+            signalTextColor: "#f5ede6",
+            labelBoxBkgColor: "#26201c",
+            labelBoxBorderColor: "#4a3c34",
+            loopBkgColor: "#1a1614",
+          },
+        },
+        {
+          id: "nordic-slate",
+          name: "Nordic Slate",
+          type: "dark",
+          icon: "ti-snowflake",
+          swatchBg: "#0b0f19",
+          swatchAccent: "#38bdf8",
+          mermaidTheme: "dark",
+          mermaidVars: {
+            fontFamily: '"Be Vietnam Pro", "Segoe UI", sans-serif',
+            fontSize: "13px",
+            primaryColor: "#172136",
+            primaryBorderColor: "#293a59",
+            primaryTextColor: "#f8fafc",
+            lineColor: "#38bdf8",
+            arrowheadColor: "#38bdf8",
+            background: "#111827",
+            clusterBkg: "#0e1524",
+            clusterBorder: "#1f2937",
+            actorBkg: "#172136",
+            actorBorder: "#293a59",
+            actorTextColor: "#f8fafc",
+            signalColor: "#38bdf8",
+            signalTextColor: "#f8fafc",
+            labelBoxBkgColor: "#172136",
+            labelBoxBorderColor: "#293a59",
+            loopBkgColor: "#0f172a",
+          },
+        },
+        {
+          id: "forest-sage",
+          name: "Forest Sage",
+          type: "dark",
+          icon: "ti-trees",
+          swatchBg: "#091310",
+          swatchAccent: "#34d399",
+          mermaidTheme: "dark",
+          mermaidVars: {
+            fontFamily: '"Be Vietnam Pro", "Segoe UI", sans-serif',
+            fontSize: "13px",
+            primaryColor: "#162b24",
+            primaryBorderColor: "#254a3e",
+            primaryTextColor: "#edf7f4",
+            lineColor: "#34d399",
+            arrowheadColor: "#34d399",
+            background: "#101f1b",
+            clusterBkg: "#0c1a16",
+            clusterBorder: "#1c332c",
+            actorBkg: "#162b24",
+            actorBorder: "#254a3e",
+            actorTextColor: "#edf7f4",
+            signalColor: "#34d399",
+            signalTextColor: "#edf7f4",
+            labelBoxBkgColor: "#162b24",
+            labelBoxBorderColor: "#254a3e",
+            loopBkgColor: "#0d1f1a",
+          },
+        },
+        {
+          id: "solarized-paper",
+          name: "Solarized Paper",
+          type: "light",
+          icon: "ti-sun-low",
+          swatchBg: "#fbf5e6",
+          swatchAccent: "#c26928",
+          mermaidTheme: "base",
+          mermaidVars: {
+            fontFamily: '"Be Vietnam Pro", "Segoe UI", sans-serif',
+            fontSize: "13px",
+            primaryColor: "#f7f0df",
+            primaryBorderColor: "#ddd2b8",
+            primaryTextColor: "#3b3228",
+            lineColor: "#9a4c14",
+            arrowheadColor: "#9a4c14",
+            background: "#f2ebd9",
+            clusterBkg: "#fcf8ee",
+            clusterBorder: "#dfd5be",
+            actorBkg: "#f7f0df",
+            actorBorder: "#ddd2b8",
+            actorTextColor: "#3b3228",
+            signalColor: "#9a4c14",
+            signalTextColor: "#3b3228",
+            labelBoxBkgColor: "#f7f0df",
+            labelBoxBorderColor: "#ddd2b8",
+            loopBkgColor: "#f9f3e4",
+          },
+        },
+      ];
+
+      function resolveThemeId(preference) {
+        if (!preference || preference === "auto") {
+          const isDark = window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)").matches;
+          return isDark ? "obsidian-terracotta" : "warm-terracotta";
+        }
+        return preference;
+      }
+
+      function getActiveThemeObject() {
+        const pref = localStorage.getItem("spec-ui-theme") || "auto";
+        const id = resolveThemeId(pref);
+        return THEME_REGISTRY.find((t) => t.id === id) || THEME_REGISTRY[0];
+      }
+
+      let _activeMermaidInstance = null;
+
       window.$docsify = {
         // Thông tin dự án
         name: "System Spec Docs",
@@ -123,29 +305,13 @@
               import("https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs")
                 .then((module) => {
                   const mermaid = module.default;
+                  _activeMermaidInstance = mermaid;
+
+                  const activeTheme = getActiveThemeObject();
                   mermaid.initialize({
                     startOnLoad: false,
-                    theme: "base",
-                    themeVariables: {
-                      fontFamily: '"Be Vietnam Pro", "Segoe UI", sans-serif',
-                      fontSize: "13px",
-                      primaryColor: "#fffaf2",
-                      primaryBorderColor: "#e5d9c8",
-                      primaryTextColor: "#1b2430",
-                      lineColor: "#0f6b63",
-                      arrowheadColor: "#0f6b63",
-                      background: "#ffffff",
-                      clusterBkg: "#fbf8f3",
-                      clusterBorder: "#e5d9c8",
-                      actorBkg: "#fffaf2",
-                      actorBorder: "#e5d9c8",
-                      actorTextColor: "#1b2430",
-                      signalColor: "#0f6b63",
-                      signalTextColor: "#4b5563",
-                      labelBoxBkgColor: "#fbf8f3",
-                      labelBoxBorderColor: "#e5d9c8",
-                      loopBkgColor: "#faf6ee",
-                    },
+                    theme: activeTheme.mermaidTheme,
+                    themeVariables: activeTheme.mermaidVars,
                     flowchart: { useMaxWidth: true, htmlLabels: true },
                     sequence: { useMaxWidth: true, showSequenceNumbers: true },
                     gantt: { useMaxWidth: true },
@@ -319,6 +485,167 @@
                           console.warn("Lỗi vẽ sơ đồ Mermaid: ", err);
                         });
                     }
+
+                    // Khởi tạo Theme Switcher Dropdown trên mọi trang
+                    initThemeSwitcher(mermaid);
+                  }
+
+                  // ==============================================================
+                  // QUẢN LÝ ĐA GIAO DIỆN (MULTI-THEME ENGINE & SWITCHER UI)
+                  // ==============================================================
+                  function reRenderMermaidDiagrams(mermaid, themeObj) {
+                    const wrappers = document.querySelectorAll(".diagram-wrapper");
+                    if (wrappers.length === 0) return;
+
+                    mermaid.initialize({
+                      startOnLoad: false,
+                      theme: themeObj.mermaidTheme,
+                      themeVariables: themeObj.mermaidVars,
+                      flowchart: { useMaxWidth: true, htmlLabels: true },
+                      sequence: { useMaxWidth: true, showSequenceNumbers: true },
+                      gantt: { useMaxWidth: true },
+                    });
+
+                    const reNodes = [];
+                    wrappers.forEach((wrap) => {
+                      const rawCode = wrap._rawMermaidCode;
+                      if (!rawCode) return;
+                      const oldMermaid = wrap.querySelector(".mermaid");
+                      if (!oldMermaid) return;
+
+                      const newDiv = document.createElement("div");
+                      newDiv.className = "mermaid";
+                      newDiv.textContent = rawCode;
+                      oldMermaid.parentNode.replaceChild(newDiv, oldMermaid);
+                      reNodes.push(newDiv);
+                    });
+
+                    if (reNodes.length > 0) {
+                      mermaid
+                        .run({ nodes: reNodes })
+                        .then(() => {
+                          reNodes.forEach((node) => {
+                            const svg = node.querySelector("svg");
+                            if (svg) {
+                              setupDiagramFocusInteractivity(svg);
+                            }
+                          });
+                        })
+                        .catch((err) => console.warn("Lỗi re-render Mermaid: ", err));
+                    }
+                  }
+
+                  function applyTheme(themePref, mermaidInstance) {
+                    localStorage.setItem("spec-ui-theme", themePref);
+                    const resolvedId = resolveThemeId(themePref);
+                    const themeObj = THEME_REGISTRY.find((t) => t.id === resolvedId) || THEME_REGISTRY[0];
+
+                    document.documentElement.setAttribute("data-theme", resolvedId);
+                    document.documentElement.setAttribute("data-theme-mode", themeObj.type);
+                    window.applyTheme = applyTheme;
+
+                    const container = document.getElementById("spec-ui-theme-switcher");
+                    if (container) {
+                      const label = container.querySelector(".theme-name-label");
+                      if (label) {
+                        label.textContent = themePref === "auto" ? "Hệ thống (" + themeObj.name + ")" : themeObj.name;
+                      }
+                      const optionBtns = container.querySelectorAll(".theme-option-btn");
+                      optionBtns.forEach((btn) => {
+                        const t = btn.getAttribute("data-theme");
+                        if (t === themePref) {
+                          btn.classList.add("is-active");
+                        } else {
+                          btn.classList.remove("is-active");
+                        }
+                      });
+                    }
+
+                    const m = mermaidInstance || _activeMermaidInstance;
+                    if (m) {
+                      reRenderMermaidDiagrams(m, themeObj);
+                    }
+                  }
+
+                  function initThemeSwitcher(mermaidInstance) {
+                    if (mermaidInstance) _activeMermaidInstance = mermaidInstance;
+                    window.applyTheme = applyTheme;
+                    let container = document.getElementById("spec-ui-theme-switcher");
+                    if (container) return;
+
+                    container = document.createElement("div");
+                    container.id = "spec-ui-theme-switcher";
+                    container.className = "theme-switcher-container";
+
+                    const savedPreference = localStorage.getItem("spec-ui-theme") || "auto";
+                    const activeTheme = getActiveThemeObject();
+
+                    container.innerHTML = `
+                      <button type="button" class="theme-switcher-btn" title="Chuyển đổi giao diện (Theme Switcher)">
+                        <i class="ti ti-palette"></i>
+                        <span class="theme-name-label">${savedPreference === "auto" ? "Hệ thống (" + activeTheme.name + ")" : activeTheme.name}</span>
+                        <i class="ti ti-chevron-down" style="font-size:0.75rem; opacity:0.7; margin-left: 2px;"></i>
+                      </button>
+                      <div class="theme-switcher-dropdown">
+                        <button type="button" class="theme-option-btn ${savedPreference === "auto" ? "is-active" : ""}" data-theme="auto">
+                          <div class="theme-option-left">
+                            <i class="ti ti-device-desktop" style="font-size: 1.05rem; color: var(--accent);"></i>
+                            <span>Tự động (Hệ thống)</span>
+                          </div>
+                          <i class="ti ti-check check-icon"></i>
+                        </button>
+                        <div class="theme-dropdown-divider"></div>
+                        ${THEME_REGISTRY.map(
+                          (t) => `
+                          <button type="button" class="theme-option-btn ${savedPreference !== "auto" && savedPreference === t.id ? "is-active" : ""}" data-theme="${t.id}">
+                            <div class="theme-option-left">
+                              <span class="theme-swatch" style="background: linear-gradient(135deg, ${t.swatchBg} 50%, ${t.swatchAccent} 50%);"></span>
+                              <span>${t.name}</span>
+                            </div>
+                            <i class="ti ti-check check-icon"></i>
+                          </button>
+                        `,
+                        ).join("")}
+                      </div>
+                    `;
+
+                    document.body.appendChild(container);
+
+                    const btn = container.querySelector(".theme-switcher-btn");
+                    btn.addEventListener("click", function (e) {
+                      e.stopPropagation();
+                      container.classList.toggle("is-open");
+                    });
+
+                    document.addEventListener("click", function (e) {
+                      if (!container.contains(e.target)) {
+                        container.classList.remove("is-open");
+                      }
+                    });
+
+                    document.addEventListener("keydown", function (e) {
+                      if (e.key === "Escape") {
+                        container.classList.remove("is-open");
+                      }
+                    });
+
+                    const optionBtns = container.querySelectorAll(".theme-option-btn");
+                    optionBtns.forEach((opt) => {
+                      opt.addEventListener("click", function () {
+                        const selected = opt.getAttribute("data-theme");
+                        applyTheme(selected, _activeMermaidInstance);
+                        container.classList.remove("is-open");
+                      });
+                    });
+
+                    if (window.matchMedia) {
+                      window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", function () {
+                        const currentPref = localStorage.getItem("spec-ui-theme") || "auto";
+                        if (currentPref === "auto") {
+                          applyTheme("auto", _activeMermaidInstance);
+                        }
+                      });
+                    }
                   }
 
                   // ==============================================================
@@ -378,11 +705,12 @@
                     clone.style.height = height + "px";
                     clone.style.maxWidth = "none";
 
-                    // Chèn rect nền sáng để hiển thị đẹp trên mọi ứng dụng
+                    // Chèn rect nền theo màu của theme đang chọn để hiển thị đẹp mọi nơi
+                    const activeTheme = getActiveThemeObject();
                     const bgRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
                     bgRect.setAttribute("width", "100%");
                     bgRect.setAttribute("height", "100%");
-                    bgRect.setAttribute("fill", "#fffdf9");
+                    bgRect.setAttribute("fill", activeTheme.swatchBg);
                     clone.insertBefore(bgRect, clone.firstChild);
 
                     const serializer = new XMLSerializer();
@@ -423,10 +751,11 @@
                       height = clone.clientHeight || 900;
                     }
 
+                    const activeTheme = getActiveThemeObject();
                     const bgRect = document.createElementNS("http://www.w3.org/2000/svg", "rect");
                     bgRect.setAttribute("width", "100%");
                     bgRect.setAttribute("height", "100%");
-                    bgRect.setAttribute("fill", "#fffdf9");
+                    bgRect.setAttribute("fill", activeTheme.swatchBg);
                     clone.insertBefore(bgRect, clone.firstChild);
 
                     const serializer = new XMLSerializer();
@@ -445,7 +774,7 @@
                       canvas.height = Math.round(height * scaleFactor);
                       const ctx = canvas.getContext("2d");
 
-                      ctx.fillStyle = "#fffdf9";
+                      ctx.fillStyle = activeTheme.swatchBg;
                       ctx.fillRect(0, 0, canvas.width, canvas.height);
                       ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
                       URL.revokeObjectURL(url);
