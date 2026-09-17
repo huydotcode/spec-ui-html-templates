@@ -80,7 +80,12 @@ Sử dụng khối mã Markdown chuẩn ` ```mermaid ` kèm chú thích caption 
 
 - **Luồng tuần tự / Xác thực / Giao tiếp API** $\rightarrow$ Dùng `sequenceDiagram` (kèm `autonumber`).
 - **Luồng nghiệp vụ có rẽ nhánh điều kiện** $\rightarrow$ Dùng `flowchart TD` (Top-Down).
-- **Kiến trúc phân tầng / Cấu trúc module** $\rightarrow$ Dùng `graph TD` hoặc `graph LR`.
+- **Kiến trúc phân tầng / Cấu trúc module** $\rightarrow$ Dùng `flowchart TD` hoặc `flowchart LR`.
+- ⚠️ **Quy tắc chống lỗi vỡ sơ đồ (Icon quả bom 💣)**:
+  - **Không dùng** `stateDiagram`, `stateDiagram-v2` hay `classDiagram` (dễ lỗi parser khi có tiếng Việt, dấu `:`, `/`, `->`). Máy trạng thái phải dùng `flowchart TD` với shape `([Bắt đầu])`, `[Trạng thái]`, `((Kết thúc))`.
+  - **Node ID**: Chỉ dùng chữ cái, chữ số và gạch dưới (`validate_link`, `MemberToken`), tuyệt đối không dùng dấu cách, gạch ngang (`-`), hay tiếng Việt.
+  - **Node Label**: Bắt buộc bọc trong dấu nháy kép `["..."]` nếu có chứa dấu `/`, `:`, `()`, `[]`, `-`, hoặc tiếng Việt có dấu.
+  - **Mũi tên liên kết**: Chỉ dùng mũi tên xuôi (`-->`, `-.->`, `==>`, `---`). Nghiêm cấm mũi tên ngược (`<-`, `<--`) hoặc hai chiều (`<--->`). Đảo vị trí Node nguồn/đích nếu cần biểu diễn phản hồi.
 
 ````markdown
 ```mermaid
