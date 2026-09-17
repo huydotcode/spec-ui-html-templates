@@ -86,6 +86,7 @@ Sử dụng khối mã Markdown chuẩn ` ```mermaid ` kèm chú thích caption 
   - **Node ID**: Chỉ dùng chữ cái, chữ số và gạch dưới (`validate_link`, `MemberToken`), tuyệt đối không dùng dấu cách, gạch ngang (`-`), hay tiếng Việt.
   - **Node Label**: Bắt buộc bọc trong dấu nháy kép `["..."]` nếu có chứa dấu `/`, `:`, `()`, `[]`, `-`, hoặc tiếng Việt có dấu.
   - **Mũi tên liên kết**: Chỉ dùng mũi tên xuôi (`-->`, `-.->`, `==>`, `---`). Nghiêm cấm mũi tên ngược (`<-`, `<--`) hoặc hai chiều (`<--->`). Đảo vị trí Node nguồn/đích nếu cần biểu diễn phản hồi.
+  - **Node điều kiện hình thoi `{...}`**: Do tính chất hình học 45° của Mermaid, text dài trên 1 dòng sẽ làm hình thoi phình to khổng lồ theo cả chiều dọc. Bắt buộc dùng `<br/>` ngắt thành 2-3 dòng ngắn (dưới 15-20 ký tự/dòng), hoặc dùng hình lục giác `{{...}}`.
 
 ````markdown
 ```mermaid
